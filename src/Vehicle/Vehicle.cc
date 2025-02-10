@@ -268,6 +268,8 @@ Vehicle::Vehicle(LinkInterface*             link,
 
     // Start timer to limit altitude above terrain queries
     _altitudeAboveTerrQueryTimer.restart();
+
+    _ballisticCalculator = new BallisticCalculator(this, this);
 }
 
 // Disconnected Vehicle for offline editing
