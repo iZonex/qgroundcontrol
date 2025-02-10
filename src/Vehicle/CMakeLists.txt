@@ -46,6 +46,7 @@ target_link_libraries(Vehicle
         PositionManager
         UTMSP
         VideoManager
+        BallisticCalculator
     PUBLIC
         Qt6::Core
         Qt6::Gui

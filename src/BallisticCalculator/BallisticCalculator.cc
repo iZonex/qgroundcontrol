@@ -1,6 +1,8 @@
 #include "BallisticCalculator.h"
+#include "Vehicle.h"
 #include "QGCApplication.h"
 #include "Settings/SettingsManager.h"
+#include "Settings/BallisticCalculatorSettings.h"
 #include <cmath>
 
 BallisticCalculator::BallisticCalculator(Vehicle* vehicle, QObject* parent)
@@ -24,10 +26,11 @@ BallisticCalculator::BallisticCalculator(Vehicle* vehicle, QObject* parent)
     if (_ballisticSettings) {
         connect(_ballisticSettings->windSpeedFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         connect(_ballisticSettings->windDirectionFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->dropHeightFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         connect(_ballisticSettings->payloadMassFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->dragCoefficientFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->crossSectionAreaFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->verticalDragCoefficientFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->horizontalDragCoefficientFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->verticalCrossSectionFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->horizontalCrossSectionFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         connect(_ballisticSettings->gimbalPitchFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
     }
 }

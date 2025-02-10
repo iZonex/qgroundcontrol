@@ -55,6 +55,7 @@
 #include <StatusTextHandler.h>
 #include <MAVLinkSigning.h>
 #include "GimbalController.h"
+#include "BallisticCalculator.h"
 
 #ifdef QGC_UTM_ADAPTER
 #include "UTMSPVehicle.h"
@@ -82,6 +83,8 @@ Vehicle::Vehicle(LinkInterface*             link,
                  int                        defaultComponentId,
                  MAV_AUTOPILOT              firmwareType,
                  MAV_TYPE                   vehicleType,
+                 FirmwarePluginManager*      firmwarePluginManager,
+                 JoystickManager*           joystickManager,
                  QObject*                   parent)
     : VehicleFactGroup              (parent)
     , _id                           (vehicleId)
@@ -187,6 +190,8 @@ Vehicle::Vehicle(LinkInterface*             link,
 
     // Start timer to limit altitude above terrain queries
     _altitudeAboveTerrQueryTimer.restart();
+
+    _ballisticCalculator = new BallisticCalculator(this, this);
 }
 
 // Disconnected Vehicle for offline editing
@@ -370,6 +375,9 @@ Vehicle::~Vehicle()
 
     delete _autopilotPlugin;
     _autopilotPlugin = nullptr;
+
+    delete _ballisticCalculator;
+    _ballisticCalculator = nullptr;
 }
 
 void Vehicle::prepareDelete()

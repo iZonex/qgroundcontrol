@@ -1392,5 +1392,7 @@ private:
     MAVLinkLogManager *_mavlinkLogManager = nullptr;
 
 /*---------------------------------------------------------------------------*/
+
+    BallisticCalculator* _ballisticCalculator{nullptr};
 };
 Q_DECLARE_METATYPE(Vehicle::MavCmdResultFailureCode_t)

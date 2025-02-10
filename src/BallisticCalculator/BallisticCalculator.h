@@ -3,8 +3,9 @@
 #include <QObject>
 #include <QGeoCoordinate>
 #include <QVariantList>
-class Vehicle;
-#include "BallisticCalculatorSettings.h"
+
+class Vehicle;  // Предварительное объявление
+class BallisticCalculatorSettings;
 
 class BallisticCalculator : public QObject
 {
