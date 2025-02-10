@@ -1,0 +1,242 @@
+{
+    "version": 1,
+    "settings": [
+        {
+            "name":             "AuxChannel",
+            "shortDescription": "AUX канал высоты",
+            "longDescription":  "Номер AUX канала для управления высотой сброса",
+            "type":            "uint32",
+            "defaultValue":     7,
+            "min":             1,
+            "max":             16
+        },
+        {
+            "name":             "AuxMinHeight",
+            "shortDescription": "Минимальная высота AUX",
+            "longDescription":  "Высота сброса при минимальном значении AUX канала",
+            "type":            "double",
+            "defaultValue":     10,
+            "min":             1,
+            "max":             500,
+            "units":           "m"
+        },
+        {
+            "name":             "AuxMaxHeight",
+            "shortDescription": "Максимальная высота AUX",
+            "longDescription":  "Высота сброса при максимальном значении AUX канала",
+            "type":            "double",
+            "defaultValue":     100,
+            "min":             1,
+            "max":             500,
+            "units":           "m"
+        },
+        {
+            "name":             "MarkerSize",
+            "shortDescription": "Размер прицельной метки",
+            "longDescription":  "Размер прицельной метки в пикселях",
+            "type":            "uint32",
+            "defaultValue":     32,
+            "min":             16,
+            "max":             128
+        },
+        {
+            "name":             "MarkerOffsetX",
+            "shortDescription": "Смещение метки по X",
+            "longDescription":  "Калибровочное смещение прицельной метки по оси X",
+            "type":            "int32",
+            "defaultValue":     0,
+            "min":             -100,
+            "max":             100,
+            "units":           "px"
+        },
+        {
+            "name":             "MarkerOffsetY",
+            "shortDescription": "Смещение метки по Y",
+            "longDescription":  "Калибровочное смещение прицельной метки по оси Y",
+            "type":            "int32",
+            "defaultValue":     0,
+            "min":             -100,
+            "max":             100,
+            "units":           "px"
+        },
+        {
+            "name":             "GimbalPitch",
+            "shortDescription": "Угол подвеса (Pitch)",
+            "longDescription":  "Текущий угол наклона камеры",
+            "type":            "double",
+            "defaultValue":     0,
+            "min":             -90,
+            "max":             90,
+            "units":           "°"
+        },
+        {
+            "name":             "WindSpeed",
+            "shortDescription": "Скорость ветра",
+            "longDescription":  "Скорость ветра в метрах в секунду",
+            "type":            "double",
+            "defaultValue":     0,
+            "min":             0,
+            "max":             100,
+            "units":           "м/с"
+        },
+        {
+            "name":             "WindDirection",
+            "shortDescription": "Направление ветра",
+            "longDescription":  "Направление ветра в градусах (0° - северный, 90° - восточный)",
+            "type":            "double",
+            "defaultValue":     0,
+            "min":             0,
+            "max":             360,
+            "units":           "°"
+        },
+        {
+            "name":             "PayloadMass",
+            "shortDescription": "Масса полезной нагрузки",
+            "longDescription":  "Масса сбрасываемой полезной нагрузки в граммах",
+            "type":            "double",
+            "defaultValue":     100,
+            "min":             1,
+            "max":             10000,
+            "units":           "g"
+        },
+        {
+            "name":             "VerticalDragCoefficient",
+            "shortDescription": "Коэффициент сопротивления по вертикали",
+            "longDescription":  "Коэффициент аэродинамического сопротивления по вертикальной оси",
+            "type":            "double",
+            "defaultValue":     0.47,
+            "min":             0.01,
+            "max":             2.0
+        },
+        {
+            "name":             "HorizontalDragCoefficient",
+            "shortDescription": "Коэффициент сопротивления по горизонтали",
+            "longDescription":  "Коэффициент аэродинамического сопротивления по горизонтальной оси",
+            "type":            "double",
+            "defaultValue":     0.47,
+            "min":             0.01,
+            "max":             2.0
+        },
+        {
+            "name":             "VerticalCrossSection",
+            "shortDescription": "Площадь вертикального сечения",
+            "longDescription":  "Площадь поперечного сечения по вертикальной оси в квадратных сантиметрах",
+            "type":            "double",
+            "defaultValue":     10,
+            "min":             1,
+            "max":             1000,
+            "units":           "cm²"
+        },
+        {
+            "name":             "HorizontalCrossSection",
+            "shortDescription": "Площадь горизонтального сечения",
+            "longDescription":  "Площадь поперечного сечения по горизонтальной оси в квадратных сантиметрах",
+            "type":            "double",
+            "defaultValue":     10,
+            "min":             1,
+            "max":             1000,
+            "units":           "cm²"
+        },
+        {
+            "name":             "CameraOffset",
+            "shortDescription": "Смещение от камеры",
+            "longDescription":  "Расстояние между камерой и центром масс груза в сантиметрах",
+            "type":            "double",
+            "defaultValue":     0,
+            "min":             -100,
+            "max":             100,
+            "units":           "cm"
+        },
+        {
+            "name":             "HeightMode",
+            "shortDescription": "Режим определения высоты",
+            "longDescription":  "Способ определения высоты сброса",
+            "type":            "uint32",
+            "enumStrings":     "Фиксированная высота,Барометрическая высота,Управление с пульта",
+            "enumValues":      "0,1,2",
+            "defaultValue":    0
+        },
+        {
+            "name":             "FixedHeight",
+            "shortDescription": "Фиксированная высота",
+            "longDescription":  "Фиксированная высота сброса в метрах",
+            "type":            "double",
+            "defaultValue":     10,
+            "min":             1,
+            "max":             500,
+            "units":           "m"
+        },
+        {
+            "name":             "CalibrationMode",
+            "shortDescription": "Режим калибровки",
+            "longDescription":  "Включает режим калибровки прицельной метки",
+            "type":            "bool",
+            "defaultValue":     false
+        },
+        {
+            "name":             "CalibrationStep",
+            "shortDescription": "Шаг калибровки",
+            "longDescription":  "Шаг изменения параметров при калибровке (пиксели или проценты)",
+            "type":            "double",
+            "defaultValue":     1,
+            "min":             0.1,
+            "max":             10,
+            "decimalPlaces":   1
+        },
+        {
+            "name":             "ActiveProfile",
+            "shortDescription": "Активный профиль",
+            "longDescription":  "Текущий активный профиль груза",
+            "type":            "string",
+            "defaultValue":     "Default"
+        },
+        {
+            "name":             "SavedProfiles",
+            "shortDescription": "Сохраненные профили",
+            "longDescription":  "JSON строка с сохраненными профилями грузов",
+            "type":            "string",
+            "defaultValue":     "{}"
+        },
+        {
+            "name":             "WindFilterEnabled",
+            "shortDescription": "Фильтрация ветра",
+            "longDescription":  "Включает фильтрацию данных о ветре",
+            "type":            "bool",
+            "defaultValue":     true
+        },
+        {
+            "name":             "WindFilterPeriod",
+            "shortDescription": "Период фильтрации",
+            "longDescription":  "Период скользящего среднего для фильтрации ветра в секундах",
+            "type":            "double",
+            "defaultValue":     2.0,
+            "min":             0.1,
+            "max":             10.0,
+            "decimalPlaces":   1
+        },
+        {
+            "name":             "ShowTrajectory",
+            "shortDescription": "Показывать траекторию",
+            "longDescription":  "Отображать расчетную траекторию падения",
+            "type":            "bool",
+            "defaultValue":     true
+        },
+        {
+            "name":             "ReadyToDropEnabled",
+            "shortDescription": "Индикация готовности",
+            "longDescription":  "Включает индикацию готовности к сбросу",
+            "type":            "bool",
+            "defaultValue":     true
+        },
+        {
+            "name":             "MaxDropWindSpeed",
+            "shortDescription": "Макс. скорость ветра",
+            "longDescription":  "Максимально допустимая скорость ветра для сброса",
+            "type":            "double",
+            "defaultValue":     10.0,
+            "min":             0.0,
+            "max":             30.0,
+            "units":           "м/с"
+        }
+    ]
+} 
