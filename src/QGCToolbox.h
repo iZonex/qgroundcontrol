@@ -43,12 +43,16 @@ class TaisyncManager;
 class MicrohardManager;
 #endif
 
+// BallisticCalculator
+class BallisticCalculator;
+
 /// This is used to manage all of our top level services/tools
 class QGCToolbox : public QObject {
     Q_OBJECT
 
 public:
     QGCToolbox(QGCApplication* app);
+    ~QGCToolbox();
 
     FirmwarePluginManager*      firmwarePluginManager   () { return _firmwarePluginManager; }
     AudioOutput*                audioOutput             () { return _audioOutput; }
@@ -79,6 +83,8 @@ public:
 #if defined(QGC_GST_MICROHARD_ENABLED)
     MicrohardManager*           microhardManager        () { return _microhardManager; }
 #endif
+
+    BallisticCalculator*        ballisticCalculator    () { return _ballisticCalculator; }
 
 private:
     void setChildToolboxes(void);
@@ -115,6 +121,9 @@ private:
 #if defined(QGC_GST_MICROHARD_ENABLED)
     MicrohardManager*           _microhardManager       = nullptr;
 #endif
+
+    BallisticCalculator*        _ballisticCalculator;
+
     friend class QGCApplication;
 };
 

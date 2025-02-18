@@ -40,12 +40,32 @@
 #if defined(QGC_GST_MICROHARD_ENABLED)
 #include "MicrohardManager.h"
 #endif
+#include "BallisticCalculator.h"
 
 #if defined(QGC_CUSTOM_BUILD)
 #include CUSTOMHEADER
 #endif
 
 QGCToolbox::QGCToolbox(QGCApplication* app)
+    : _app(app)
+    // Create tools
+    , _audioOutput(nullptr)
+    , _factSystem(nullptr)
+    , _firmwarePluginManager(nullptr)
+    , _followMe(nullptr)
+    , _imageProvider(nullptr)
+    , _joystickManager(nullptr)
+    , _linkManager(nullptr)
+    , _mavlinkProtocol(nullptr)
+    , _missionCommandTree(nullptr)
+    , _multiVehicleManager(nullptr)
+    , _mapEngineManager(nullptr)
+    , _uasMessageHandler(nullptr)
+    , _qgcPositionManager(nullptr)
+    , _videoManager(nullptr)
+    , _mavlinkLogManager(nullptr)
+    , _adsbVehicleManager(nullptr)
+    , _ballisticCalculator(nullptr)
 {
     // SettingsManager must be first so settings are available to any subsequent tools
     _settingsManager        = new SettingsManager           (app, this);
@@ -78,6 +98,71 @@ QGCToolbox::QGCToolbox(QGCApplication* app)
 #endif
 #if defined(QGC_GST_MICROHARD_ENABLED)
     _microhardManager       = new MicrohardManager          (app, this);
+#endif
+
+    _ballisticCalculator = new BallisticCalculator(_multiVehicleManager->activeVehicle(), this);
+}
+
+QGCToolbox::~QGCToolbox()
+{
+    delete _ballisticCalculator;
+    _ballisticCalculator = nullptr;
+
+    // SettingsManager must be first so settings are available to any subsequent tools
+    delete _settingsManager;
+    _settingsManager = nullptr;
+
+    //-- Scan and load plugins
+    delete _corePlugin;
+    _corePlugin = nullptr;
+
+    delete _audioOutput;
+    _audioOutput = nullptr;
+    delete _factSystem;
+    _factSystem = nullptr;
+    delete _firmwarePluginManager;
+    _firmwarePluginManager = nullptr;
+#ifndef __mobile__
+    delete _gpsManager;
+    _gpsManager = nullptr;
+#endif
+    delete _imageProvider;
+    _imageProvider = nullptr;
+    delete _joystickManager;
+    _joystickManager = nullptr;
+    delete _linkManager;
+    _linkManager = nullptr;
+    delete _mavlinkProtocol;
+    _mavlinkProtocol = nullptr;
+    delete _missionCommandTree;
+    _missionCommandTree = nullptr;
+    delete _multiVehicleManager;
+    _multiVehicleManager = nullptr;
+    delete _mapEngineManager;
+    _mapEngineManager = nullptr;
+    delete _uasMessageHandler;
+    _uasMessageHandler = nullptr;
+    delete _qgcPositionManager;
+    _qgcPositionManager = nullptr;
+    delete _followMe;
+    _followMe = nullptr;
+    delete _videoManager;
+    _videoManager = nullptr;
+    delete _mavlinkLogManager;
+    _mavlinkLogManager = nullptr;
+    delete _adsbVehicleManager;
+    _adsbVehicleManager = nullptr;
+#if defined(QGC_GST_TAISYNC_ENABLED)
+    delete _taisyncManager;
+    _taisyncManager = nullptr;
+#endif
+#if defined(QGC_GST_MICROHARD_ENABLED)
+    delete _microhardManager;
+    _microhardManager = nullptr;
+#endif
+#if defined(QGC_ENABLE_PAIRING)
+    delete _pairingManager;
+    _pairingManager = nullptr;
 #endif
 }
 

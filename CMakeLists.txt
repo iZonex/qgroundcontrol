@@ -173,6 +173,9 @@ include_directories(
 add_subdirectory(libs)
 add_subdirectory(src)
 
+# Add BallisticCalculator
+add_subdirectory(src/BallisticCalculator)
+
 set(QGC_RESOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/qgcimages.qrc
 	${CMAKE_CURRENT_SOURCE_DIR}/qgcresources.qrc
@@ -242,5 +245,18 @@ if(NOT QT_MKSPEC MATCHES "winrt")
 			Qt5::SerialPort
 		)
 endif()
+
+target_link_libraries(QGroundControl
+    PRIVATE
+        Qt5::Core
+        Qt5::Quick
+        Qt5::QuickWidgets
+        Qt5::Location
+        Qt5::Positioning
+        Qt5::TextToSpeech
+        Qt5::Widgets
+        BallisticCalculator
+        qgc
+)
 
 include(QGCDeploy)

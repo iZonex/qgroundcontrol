@@ -116,6 +116,9 @@ public:
     Q_PROPERTY(PairingManager*      pairingManager          READ pairingManager         CONSTANT)
 #endif
 
+    Q_PROPERTY(QObject* adsbVehicleManager      READ adsbVehicleManager      CONSTANT)
+    Q_PROPERTY(QObject* ballisticCalculator     READ ballisticCalculator     CONSTANT)
+
     Q_INVOKABLE void    saveGlobalSetting       (const QString& key, const QString& value);
     Q_INVOKABLE QString loadGlobalSetting       (const QString& key, const QString& defaultValue);
     Q_INVOKABLE void    saveBoolGlobalSetting   (const QString& key, bool value);
@@ -229,6 +232,8 @@ public:
     QString telemetryFileExtension  (void) const  { return AppSettings::telemetryFileExtension; }
 
     QString qgcVersion              (void) const;
+
+    BallisticCalculator*        ballisticCalculator     () { return _toolbox->ballisticCalculator(); }
 
     // Overrides from QGCTool
     virtual void setToolbox(QGCToolbox* toolbox);

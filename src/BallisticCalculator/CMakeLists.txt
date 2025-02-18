@@ -1,4 +1,4 @@
-find_package(Qt6 REQUIRED COMPONENTS Core Quick Location Positioning)
+find_package(Qt5 REQUIRED COMPONENTS Core Quick Location Positioning)
 
 add_library(BallisticCalculator
     BallisticCalculator.cc
@@ -7,10 +7,10 @@ add_library(BallisticCalculator
 
 target_link_libraries(BallisticCalculator
     PUBLIC
-        Qt6::Core
-        Qt6::Location
-        Qt6::Quick
-        Qt6::Positioning
+        Qt5::Core
+        Qt5::Location
+        Qt5::Quick
+        Qt5::Positioning
         Settings
         Vehicle
         FactSystem

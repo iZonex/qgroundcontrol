@@ -13,32 +13,37 @@ public:
 
     DEFINE_SETTING_NAME_GROUP()
 
-    DEFINE_SETTINGFACT(AuxChannel)
-    DEFINE_SETTINGFACT(AuxMinHeight)
-    DEFINE_SETTINGFACT(AuxMaxHeight)
-    DEFINE_SETTINGFACT(MarkerSize)
-    DEFINE_SETTINGFACT(MarkerOffsetX)
-    DEFINE_SETTINGFACT(MarkerOffsetY)
-    DEFINE_SETTINGFACT(GimbalPitch)
-    DEFINE_SETTINGFACT(WindSpeed)
-    DEFINE_SETTINGFACT(WindDirection)
+    // Параметры груза
     DEFINE_SETTINGFACT(PayloadMass)
     DEFINE_SETTINGFACT(VerticalDragCoefficient)
     DEFINE_SETTINGFACT(HorizontalDragCoefficient)
     DEFINE_SETTINGFACT(VerticalCrossSection)
     DEFINE_SETTINGFACT(HorizontalCrossSection)
-    DEFINE_SETTINGFACT(CameraOffset)
-    DEFINE_SETTINGFACT(HeightMode)
-    DEFINE_SETTINGFACT(FixedHeight)
-    DEFINE_SETTINGFACT(CalibrationMode)
-    DEFINE_SETTINGFACT(CalibrationStep)
-    DEFINE_SETTINGFACT(ActiveProfile)
-    DEFINE_SETTINGFACT(SavedProfiles)
+
+    // Параметры ветра
+    DEFINE_SETTINGFACT(WindSpeed)
+    DEFINE_SETTINGFACT(WindDirection)
     DEFINE_SETTINGFACT(WindFilterEnabled)
     DEFINE_SETTINGFACT(WindFilterPeriod)
+
+    // Параметры сброса
+    DEFINE_SETTINGFACT(AuxChannel)
+    DEFINE_SETTINGFACT(AuxMinHeight)
+    DEFINE_SETTINGFACT(AuxMaxHeight)
+    DEFINE_SETTINGFACT(DropHeight)
+    DEFINE_SETTINGFACT(GimbalPitch)
+
+    // Параметры OSD
+    DEFINE_SETTINGFACT(MarkerSize)
+    DEFINE_SETTINGFACT(MarkerOffsetX)
+    DEFINE_SETTINGFACT(MarkerOffsetY)
     DEFINE_SETTINGFACT(ShowTrajectory)
     DEFINE_SETTINGFACT(ReadyToDropEnabled)
     DEFINE_SETTINGFACT(MaxDropWindSpeed)
+
+    // Профили
+    DEFINE_SETTINGFACT(ActiveProfile)
+    DEFINE_SETTINGFACT(SavedProfiles)
 
     // Режимы определения высоты
     static const int HeightModeFixed = 0;

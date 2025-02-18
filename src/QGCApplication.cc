@@ -106,6 +106,7 @@
 #include "CustomAction.h"
 #include "CustomActionManager.h"
 #include "GimbalController.h"
+#include "BallisticCalculator.h"
 
 #if defined(QGC_ENABLE_PAIRING)
 #include "PairingManager.h"
@@ -548,6 +549,9 @@ void QGCApplication::_initCommon()
     if(QFontDatabase::addApplicationFont(":/fonts/opensans-demibold") < 0) {
         qWarning() << "Could not load /fonts/opensans-demibold font";
     }
+
+    // Register BallisticCalculator
+    qmlRegisterType<BallisticCalculator>  (kQGCVehicle, 1, 0, "BallisticCalculator");
 }
 
 bool QGCApplication::_initForNormalAppBoot()

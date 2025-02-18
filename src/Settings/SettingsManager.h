@@ -30,6 +30,7 @@
 #include "GimbalControllerSettings.h"
 #include <QVariantList>
 #include "RemoteIDSettings.h"
+#include "BallisticCalculatorSettings.h"
 
 /// Provides access to all app settings
 class SettingsManager : public QGCTool
@@ -56,6 +57,7 @@ public:
     Q_PROPERTY(QObject* apmMavlinkStreamRateSettings    READ apmMavlinkStreamRateSettings   CONSTANT)
 #endif
     Q_PROPERTY(QObject* remoteIDSettings                READ remoteIDSettings               CONSTANT)
+    Q_PROPERTY(QObject* ballisticCalculatorSettings      READ ballisticCalculatorSettings     CONSTANT)
     // Override from QGCTool
     virtual void setToolbox(QGCToolbox *toolbox);
 
@@ -76,6 +78,8 @@ public:
     APMMavlinkStreamRateSettings*   apmMavlinkStreamRateSettings(void) { return _apmMavlinkStreamRateSettings; }
 #endif
     RemoteIDSettings*               remoteIDSettings            (void) { return _remoteIDSettings; }
+    BallisticCalculatorSettings*     ballisticCalculatorSettings  (void) { return _ballisticCalculatorSettings; }
+
 private:
     AppSettings*                    _appSettings;
     UnitsSettings*                  _unitsSettings;
@@ -94,6 +98,7 @@ private:
     APMMavlinkStreamRateSettings*   _apmMavlinkStreamRateSettings;
 #endif
     RemoteIDSettings*               _remoteIDSettings;
+    BallisticCalculatorSettings*     _ballisticCalculatorSettings;
 };
 
 #endif
