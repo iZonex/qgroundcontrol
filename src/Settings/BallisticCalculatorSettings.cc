@@ -6,6 +6,16 @@
 #include <QQmlEngine>
 #include <QtQml>
 
+// Определяем новый макрос, который определяет только функцию, но не константу имени
+#define DECLARE_SETTINGSFACT_FUNC_ONLY(CLASS, NAME) \
+    Fact* CLASS::NAME() \
+    { \
+        if (!_ ## NAME ## Fact) { \
+            _ ## NAME ## Fact = _createSettingsFact(NAME ## Name); \
+        } \
+        return _ ## NAME ## Fact; \
+    }
+
 // Правильное использование макроса DECLARE_SETTINGGROUP
 // Первый параметр должен быть "BallisticCalculator", чтобы получилось "BallisticCalculatorSettings"
 DECLARE_SETTINGGROUP(BallisticCalculator, "BallisticCalculator")
@@ -46,16 +56,16 @@ BallisticCalculatorSettings::~BallisticCalculatorSettings()
 {
 }
 
-// Используем макрос DECLARE_SETTINGSFACT только для методов, объявленных с DEFINE_SETTINGFACT
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterEnabled)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterPeriod)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxChannel)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMinHeight)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMaxHeight)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropHeight)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, GimbalPitch)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ShowTrajectory)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ActiveProfile)
+// Используем макрос DECLARE_SETTINGSFACT_FUNC_ONLY только для методов, объявленных с DEFINE_SETTINGFACT
+DECLARE_SETTINGSFACT_FUNC_ONLY(BallisticCalculatorSettings, WindFilterEnabled)
+DECLARE_SETTINGSFACT_FUNC_ONLY(BallisticCalculatorSettings, WindFilterPeriod)
+DECLARE_SETTINGSFACT_FUNC_ONLY(BallisticCalculatorSettings, AuxChannel)
+DECLARE_SETTINGSFACT_FUNC_ONLY(BallisticCalculatorSettings, AuxMinHeight)
+DECLARE_SETTINGSFACT_FUNC_ONLY(BallisticCalculatorSettings, AuxMaxHeight)
+DECLARE_SETTINGSFACT_FUNC_ONLY(BallisticCalculatorSettings, DropHeight)
+DECLARE_SETTINGSFACT_FUNC_ONLY(BallisticCalculatorSettings, GimbalPitch)
+DECLARE_SETTINGSFACT_FUNC_ONLY(BallisticCalculatorSettings, ShowTrajectory)
+DECLARE_SETTINGSFACT_FUNC_ONLY(BallisticCalculatorSettings, ActiveProfile)
 
 // Константные методы доступа к фактам
 Fact* BallisticCalculatorSettings::PayloadMass() const
