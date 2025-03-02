@@ -57,6 +57,7 @@
 #endif
 #include "Autotune.h"
 #include "RemoteIDManager.h"
+#include "BallisticCalculator.h"
 
 QGC_LOGGING_CATEGORY(VehicleLog, "VehicleLog")
 
@@ -269,7 +270,7 @@ Vehicle::Vehicle(LinkInterface*             link,
     // Start timer to limit altitude above terrain queries
     _altitudeAboveTerrQueryTimer.restart();
 
-    _ballisticCalculator = new BallisticCalculator(this, this);
+    _ballisticCalculator = new BallisticCalculator(this, qobject_cast<QObject*>(this));
 }
 
 // Disconnected Vehicle for offline editing
