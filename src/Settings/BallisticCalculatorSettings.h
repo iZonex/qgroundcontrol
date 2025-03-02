@@ -13,6 +13,9 @@ public:
 
     DEFINE_SETTING_NAME_GROUP()
 
+    // Основные настройки
+    DEFINE_SETTINGFACT(Enabled)
+    
     // Параметры груза
     DEFINE_SETTINGFACT(PayloadMass)
     DEFINE_SETTINGFACT(VerticalDragCoefficient)
@@ -48,6 +51,10 @@ public:
     // Профили
     DEFINE_SETTINGFACT(ActiveProfile)
     DEFINE_SETTINGFACT(SavedProfiles)
+    
+    // Калибровка
+    DEFINE_SETTINGFACT(CalibrationMode)
+    DEFINE_SETTINGFACT(CalibrationStep)
 
     // Режимы определения высоты
     static const int HeightModeFixed = 0;
