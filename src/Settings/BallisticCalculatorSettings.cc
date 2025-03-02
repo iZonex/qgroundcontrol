@@ -47,6 +47,7 @@ DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MaxDropWindSpeed)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ActiveProfile)
 DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, SavedProfiles)
 
+// Полная реализация конструктора
 BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
     : SettingsGroup(name, settingsGroup, parent)
 {
@@ -79,6 +80,12 @@ BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
     
     ActiveProfile();
     SavedProfiles();
+}
+
+// Реализация деструктора
+BallisticCalculatorSettings::~BallisticCalculatorSettings()
+{
+    // Пустой деструктор, все очистится автоматически
 }
 
 void BallisticCalculatorSettings::saveCurrentProfile(const QString& name)
