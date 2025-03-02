@@ -24,18 +24,18 @@ public:
     DEFINE_SETTING_NAME_GROUP()
 
     // Параметры груза
-    DEFINE_SETTINGFACT_CONST(PayloadMass)
-    DEFINE_SETTINGFACT_CONST(VerticalDragCoefficient)
-    DEFINE_SETTINGFACT_CONST(HorizontalDragCoefficient)
-    DEFINE_SETTINGFACT_CONST(VerticalCrossSection)
-    DEFINE_SETTINGFACT_CONST(HorizontalCrossSection)
+    DEFINE_SETTINGFACT(PayloadMass)
+    DEFINE_SETTINGFACT(VerticalDragCoefficient)
+    DEFINE_SETTINGFACT(HorizontalDragCoefficient)
+    DEFINE_SETTINGFACT(VerticalCrossSection)
+    DEFINE_SETTINGFACT(HorizontalCrossSection)
 
     // Параметры ветра
-    DEFINE_SETTINGFACT_CONST(WindSpeed)
-    DEFINE_SETTINGFACT_CONST(WindDirection)
+    DEFINE_SETTINGFACT(WindSpeed)
+    DEFINE_SETTINGFACT(WindDirection)
     DEFINE_SETTINGFACT(WindFilterEnabled)
     DEFINE_SETTINGFACT(WindFilterPeriod)
-    DEFINE_SETTINGFACT_CONST(WindAltitude)
+    DEFINE_SETTINGFACT(WindAltitude)
 
     // Параметры сброса
     DEFINE_SETTINGFACT(AuxChannel)
@@ -43,21 +43,21 @@ public:
     DEFINE_SETTINGFACT(AuxMaxHeight)
     DEFINE_SETTINGFACT(DropHeight)
     DEFINE_SETTINGFACT(GimbalPitch)
-    DEFINE_SETTINGFACT_CONST(DropAltitude)
-    DEFINE_SETTINGFACT_CONST(DropSpeed)
-    DEFINE_SETTINGFACT_CONST(DropDirection)
+    DEFINE_SETTINGFACT(DropAltitude)
+    DEFINE_SETTINGFACT(DropSpeed)
+    DEFINE_SETTINGFACT(DropDirection)
 
     // Параметры OSD
-    DEFINE_SETTINGFACT_CONST(MarkerSize)
-    DEFINE_SETTINGFACT_CONST(MarkerOffsetX)
-    DEFINE_SETTINGFACT_CONST(MarkerOffsetY)
+    DEFINE_SETTINGFACT(MarkerSize)
+    DEFINE_SETTINGFACT(MarkerOffsetX)
+    DEFINE_SETTINGFACT(MarkerOffsetY)
     DEFINE_SETTINGFACT(ShowTrajectory)
-    DEFINE_SETTINGFACT_CONST(ReadyToDropEnabled)
-    DEFINE_SETTINGFACT_CONST(MaxDropWindSpeed)
+    DEFINE_SETTINGFACT(ReadyToDropEnabled)
+    DEFINE_SETTINGFACT(MaxDropWindSpeed)
 
     // Профили
     DEFINE_SETTINGFACT(ActiveProfile)
-    DEFINE_SETTINGFACT_CONST(SavedProfiles)
+    DEFINE_SETTINGFACT(SavedProfiles)
 
     // Режимы определения высоты
     static const int HeightModeFixed = 0;
