@@ -74,11 +74,11 @@ public:
     FirmwareUpgradeSettings*        firmwareUpgradeSettings     (void) { return _firmwareUpgradeSettings; }
     ADSBVehicleManagerSettings*     adsbVehicleManagerSettings  (void) { return _adsbVehicleManagerSettings; }
     GimbalControllerSettings*       gimbalControllerSettings    (void) { return _gimbalControllerSettings; }
+    BallisticCalculatorSettings*     ballisticCalculatorSettings  (void) { return _ballisticCalculatorSettings; }
 #if !defined(NO_ARDUPILOT_DIALECT)
     APMMavlinkStreamRateSettings*   apmMavlinkStreamRateSettings(void) { return _apmMavlinkStreamRateSettings; }
 #endif
     RemoteIDSettings*               remoteIDSettings            (void) { return _remoteIDSettings; }
-    BallisticCalculatorSettings*     ballisticCalculatorSettings  (void) { return nullptr; /* _ballisticCalculatorSettings; */ }
 
 private:
     AppSettings*                    _appSettings;

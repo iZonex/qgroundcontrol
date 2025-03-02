@@ -55,9 +55,9 @@ void SettingsManager::setToolbox(QGCToolbox *toolbox)
     _firmwareUpgradeSettings =      new FirmwareUpgradeSettings     (this);
     _adsbVehicleManagerSettings =   new ADSBVehicleManagerSettings  (this);
     _gimbalControllerSettings =     new GimbalControllerSettings       (this);
+    _ballisticCalculatorSettings =   new BallisticCalculatorSettings     (this);
 #if !defined(NO_ARDUPILOT_DIALECT)
     _apmMavlinkStreamRateSettings = new APMMavlinkStreamRateSettings(this);
 #endif
     _remoteIDSettings =             new RemoteIDSettings            (this);
-    // _ballisticCalculatorSettings = new BallisticCalculatorSettings(this);
 }

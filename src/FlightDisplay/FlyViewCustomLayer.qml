@@ -58,8 +58,8 @@ Item {
     Rectangle {
         id: ballisticTargetIndicator
         anchors.fill: parent
-        color: "transparent"
         visible: QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
+        color: "transparent"
         
         // Прицельная метка
         Rectangle {
