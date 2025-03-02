@@ -17,10 +17,22 @@ BallisticCalculator::BallisticCalculator(Vehicle* vehicle, QObject* parent)
     if (_vehicle) {
         connect(_vehicle, &Vehicle::rcChannelsChanged, this, &BallisticCalculator::_rcChannelsChanged);
         connect(_vehicle, &Vehicle::coordinateChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_vehicle->heading(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_vehicle->altitudeRelative(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_vehicle->pitch(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
-        connect(_vehicle->roll(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        
+        if (_vehicle->heading()) {
+            connect(_vehicle->heading(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
+        }
+        
+        if (_vehicle->altitudeRelative()) {
+            connect(_vehicle->altitudeRelative(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
+        }
+        
+        if (_vehicle->pitch()) {
+            connect(_vehicle->pitch(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        }
+        
+        if (_vehicle->roll()) {
+            connect(_vehicle->roll(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        }
     }
 
     // Безопасное подключение сигналов от настроек
@@ -60,7 +72,11 @@ BallisticCalculator::BallisticCalculator(Vehicle* vehicle, QObject* parent)
             });
             
             // Устанавливаем начальное состояние активности
-            setIsActive(_ballisticSettings->Enabled()->rawValue().toBool());
+            if (_ballisticSettings && _ballisticSettings->Enabled() && _ballisticSettings->Enabled()->rawValue().isValid()) {
+                setIsActive(_ballisticSettings->Enabled()->rawValue().toBool());
+            } else {
+                setIsActive(false); // По умолчанию выключено, если настройки недоступны
+            }
         }
     }
 }
@@ -111,7 +127,11 @@ BallisticCalculator::BallisticCalculator(QObject* parent)
             });
             
             // Устанавливаем начальное состояние активности
-            setIsActive(_ballisticSettings->Enabled()->rawValue().toBool());
+            if (_ballisticSettings && _ballisticSettings->Enabled() && _ballisticSettings->Enabled()->rawValue().isValid()) {
+                setIsActive(_ballisticSettings->Enabled()->rawValue().toBool());
+            } else {
+                setIsActive(false); // По умолчанию выключено, если настройки недоступны
+            }
         }
     }
 }
@@ -145,7 +165,7 @@ void BallisticCalculator::setIsActive(bool active)
                 canUpdateTrajectory = false;
             }
             
-            if (canUpdateTrajectory) {
+            if (canUpdateTrajectory && _vehicle) {
                 _updateTrajectory();
             }
         }
@@ -163,6 +183,13 @@ void BallisticCalculator::updateCalculations()
 void BallisticCalculator::calculateTrajectory()
 {
     if (!_vehicle || !_ballisticSettings) {
+        return;
+    }
+
+    // Проверяем, что все необходимые настройки существуют
+    if (!_vehicle->altitudeRelative() || 
+        !_ballisticSettings->WindSpeed() || 
+        !_ballisticSettings->WindDirection()) {
         return;
     }
 
@@ -192,6 +219,15 @@ QGeoCoordinate BallisticCalculator::calculateImpactPoint(const QGeoCoordinate& v
                                                         double windDirection)
 {
     if (!_ballisticSettings) {
+        return vehiclePosition;
+    }
+    
+    // Проверяем, что все необходимые настройки существуют
+    if (!_ballisticSettings->PayloadMass() || 
+        !_ballisticSettings->VerticalDragCoefficient() || 
+        !_ballisticSettings->HorizontalDragCoefficient() || 
+        !_ballisticSettings->VerticalCrossSection() || 
+        !_ballisticSettings->HorizontalCrossSection()) {
         return vehiclePosition;
     }
     
@@ -269,6 +305,18 @@ QVariantList BallisticCalculator::calculateTrajectoryPoints()
 {
     QVariantList points;
     if (!_vehicle || !_ballisticSettings) return points;
+    
+    // Проверяем, что все необходимые настройки существуют
+    if (!_vehicle->altitudeRelative() || 
+        !_ballisticSettings->PayloadMass() || 
+        !_ballisticSettings->VerticalDragCoefficient() || 
+        !_ballisticSettings->HorizontalDragCoefficient() || 
+        !_ballisticSettings->VerticalCrossSection() || 
+        !_ballisticSettings->HorizontalCrossSection() || 
+        !_ballisticSettings->WindSpeed() || 
+        !_ballisticSettings->WindDirection()) {
+        return points;
+    }
 
     // Параметры груза
     double mass = _ballisticSettings->PayloadMass()->rawValue().toDouble() / 1000.0;
@@ -413,10 +461,22 @@ void BallisticCalculator::setVehicle(Vehicle* vehicle)
     if (_vehicle) {
         connect(_vehicle, &Vehicle::rcChannelsChanged, this, &BallisticCalculator::_rcChannelsChanged);
         connect(_vehicle, &Vehicle::coordinateChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_vehicle->heading(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_vehicle->altitudeRelative(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_vehicle->pitch(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
-        connect(_vehicle->roll(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        
+        if (_vehicle->heading()) {
+            connect(_vehicle->heading(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
+        }
+        
+        if (_vehicle->altitudeRelative()) {
+            connect(_vehicle->altitudeRelative(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
+        }
+        
+        if (_vehicle->pitch()) {
+            connect(_vehicle->pitch(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        }
+        
+        if (_vehicle->roll()) {
+            connect(_vehicle->roll(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        }
     }
 
     // Обновляем траекторию с новым транспортным средством
