@@ -1,4 +1,3 @@
-
 add_library(Settings
 	ADSBVehicleManagerSettings.cc
 	ADSBVehicleManagerSettings.h
@@ -10,6 +9,8 @@ add_library(Settings
 	AutoConnectSettings.h
 	BrandImageSettings.cc
 	BrandImageSettings.h
+	CustomOSDSettings.cc
+	CustomOSDSettings.h
 	FirmwareUpgradeSettings.cc
 	FirmwareUpgradeSettings.h
 	GimbalControllerSettings.cc

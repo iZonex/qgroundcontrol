@@ -64,6 +64,14 @@ Item {
         bottomEdgeRightInset:   virtualJoystickMultiTouch.visible ? virtualJoystickMultiTouch.bottomEdgeRightInset : parentToolInsets.bottomEdgeRightInset
     }
 
+    // Добавляем наш кастомный OSD модуль
+    CustomOSD {
+        id:                     customOSD
+        anchors.margins:        _toolsMargin * 2
+        z:                      QGroundControl.zOrderWidgets + 1
+        visible:                !QGroundControl.videoManager.fullScreen
+    }
+
     FlyViewMissionCompleteDialog {
         missionController:      _missionController
         geoFenceController:     _geoFenceController

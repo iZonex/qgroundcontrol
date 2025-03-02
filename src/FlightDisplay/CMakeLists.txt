@@ -1,6 +1,6 @@
-
 add_custom_target(FligthDisplayQml
 	SOURCES
+		CustomOSD.qml
 		DefaultChecklist.qml
 		FixedWingChecklist.qml
 		FlightDisplayViewDummy.qml

@@ -164,6 +164,12 @@ QVariantList &QGCCorePlugin::settingsPages()
         _p->pHelp = new QmlComponentInfo(tr("Help"),
                                          QUrl::fromUserInput("qrc:/qml/HelpSettings.qml"));
         _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pHelp)));
+        
+        // Добавляем страницу настроек для Custom OSD
+        QmlComponentInfo* pCustomOSD = new QmlComponentInfo(tr("Custom OSD"),
+                                                           QUrl::fromUserInput("qrc:/qml/CustomOSDSettings.qml"));
+        _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(pCustomOSD)));
+        
 #if defined(QT_DEBUG)
         //-- These are always present on Debug builds
         _p->pMockLink = new QmlComponentInfo(tr("Mock Link"),

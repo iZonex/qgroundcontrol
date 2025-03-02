@@ -1,6 +1,8 @@
 add_custom_target(UiPreferencesQml
 	SOURCES
 		BluetoothSettings.qml
+		CustomOSDSettings.qml
+		CustomOSDPreview.qml
 		DebugWindow.qml
 		GeneralSettings.qml
 		HelpSettings.qml
@@ -9,6 +11,7 @@ add_custom_target(UiPreferencesQml
 		MavlinkSettings.qml
 		MockLink.qml
 		MockLinkSettings.qml
+		RemoteIDSettings.qml
 		SerialSettings.qml
 		TcpSettings.qml
 		UdpSettings.qml
