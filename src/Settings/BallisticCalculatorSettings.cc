@@ -4,7 +4,9 @@
 #include <QJsonArray>
 #include <QQmlEngine>
 
-DECLARE_SETTINGGROUP(BallisticCalculator, "BallisticCalculator")
+// Объявление группы настроек
+const char* BallisticCalculatorSettings::name = "BallisticCalculator";
+const char* BallisticCalculatorSettings::settingsGroup = "BallisticCalculator";
 
 // Реализация методов доступа к Fact
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, PayloadMass)
@@ -35,7 +37,7 @@ DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ActiveProfile)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, SavedProfiles)
 
 BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
-    : SettingsGroup(settingsGroup, QString() /* root settings group */, parent)
+    : SettingsGroup(name, settingsGroup, parent)
 {
     QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
 

@@ -58,7 +58,6 @@ public:
     Q_INVOKABLE bool isReadyToDrop() const;
 
 private:
-    void saveProfileToJson(const QString& name, const QJsonObject& profile);
     QJsonObject loadProfileFromJson(const QString& name) const;
     QJsonObject getCurrentProfileData() const;
     void applyProfileData(const QJsonObject& profile);
