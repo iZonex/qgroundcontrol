@@ -1,6 +1,7 @@
 {
     "version": 1,
-    "settings": [
+    "fileType": "FactMetaData",
+    "QGC.MetaData.Facts": [
         {
             "name":             "Enabled",
             "shortDescription": "Включить баллистический калькулятор",
