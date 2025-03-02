@@ -3,6 +3,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QQmlEngine>
+#include <QtQml>
 
 // Макрос для объявления константных методов доступа к Fact
 #define DECLARE_SETTINGSFACT_CONST(CLASS, NAME) \
@@ -15,7 +16,12 @@
         return _ ## NAME ## Fact; \
     }
 
-DECLARE_SETTINGGROUP(BallisticCalculator, "BallisticCalculator")
+// Объявление статических переменных и конструктора
+const char* BallisticCalculatorSettings::name = "BallisticCalculator";
+const char* BallisticCalculatorSettings::settingsGroup = "BallisticCalculator";
+
+BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
+    : SettingsGroup(name, settingsGroup, parent)
 {
     qmlRegisterUncreatableType<BallisticCalculatorSettings>("QGroundControl.SettingsManager", 1, 0, "BallisticCalculatorSettings", "Reference only");
     
