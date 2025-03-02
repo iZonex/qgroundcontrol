@@ -4,10 +4,7 @@
 #include <QJsonArray>
 #include <QQmlEngine>
 
-DECLARE_SETTINGGROUP(BallisticCalculatorSettings, "BallisticCalculator")
-{
-    QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
-}
+DECLARE_SETTINGGROUP(BallisticCalculator, "BallisticCalculator")
 
 // Реализация методов доступа к Fact
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, PayloadMass)
@@ -42,32 +39,33 @@ BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
 {
     QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
 
-    _payloadMassFact =                _createSettingsFact(PayloadMassName);
-    _verticalDragCoefficientFact =    _createSettingsFact(VerticalDragCoefficientName);
-    _horizontalDragCoefficientFact =  _createSettingsFact(HorizontalDragCoefficientName);
-    _verticalCrossSectionFact =       _createSettingsFact(VerticalCrossSectionName);
-    _horizontalCrossSectionFact =     _createSettingsFact(HorizontalCrossSectionName);
-
-    _windSpeedFact =                  _createSettingsFact(WindSpeedName);
-    _windDirectionFact =              _createSettingsFact(WindDirectionName);
-    _windFilterEnabledFact =          _createSettingsFact(WindFilterEnabledName);
-    _windFilterPeriodFact =           _createSettingsFact(WindFilterPeriodName);
-
-    _auxChannelFact =                 _createSettingsFact(AuxChannelName);
-    _auxMinHeightFact =               _createSettingsFact(AuxMinHeightName);
-    _auxMaxHeightFact =               _createSettingsFact(AuxMaxHeightName);
-    _dropHeightFact =                 _createSettingsFact(DropHeightName);
-    _gimbalPitchFact =                _createSettingsFact(GimbalPitchName);
-
-    _markerSizeFact =                 _createSettingsFact(MarkerSizeName);
-    _markerOffsetXFact =              _createSettingsFact(MarkerOffsetXName);
-    _markerOffsetYFact =              _createSettingsFact(MarkerOffsetYName);
-    _showTrajectoryFact =             _createSettingsFact(ShowTrajectoryName);
-    _readyToDropEnabledFact =         _createSettingsFact(ReadyToDropEnabledName);
-    _maxDropWindSpeedFact =           _createSettingsFact(MaxDropWindSpeedName);
-
-    _activeProfileFact =              _createSettingsFact(ActiveProfileName);
-    _savedProfilesFact =              _createSettingsFact(SavedProfilesName);
+    // Создаем факты при инициализации
+    PayloadMass();
+    VerticalDragCoefficient();
+    HorizontalDragCoefficient();
+    VerticalCrossSection();
+    HorizontalCrossSection();
+    
+    WindSpeed();
+    WindDirection();
+    WindFilterEnabled();
+    WindFilterPeriod();
+    
+    AuxChannel();
+    AuxMinHeight();
+    AuxMaxHeight();
+    DropHeight();
+    GimbalPitch();
+    
+    MarkerSize();
+    MarkerOffsetX();
+    MarkerOffsetY();
+    ShowTrajectory();
+    ReadyToDropEnabled();
+    MaxDropWindSpeed();
+    
+    ActiveProfile();
+    SavedProfiles();
 }
 
 void BallisticCalculatorSettings::saveCurrentProfile(const QString& name)
