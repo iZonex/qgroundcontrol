@@ -15,10 +15,10 @@ BallisticCalculator::BallisticCalculator(Vehicle* vehicle, QObject* parent)
     if (_vehicle) {
         connect(_vehicle, &Vehicle::rcChannelsChanged, this, &BallisticCalculator::_rcChannelsChanged);
         connect(_vehicle, &Vehicle::coordinateChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_vehicle, &Vehicle::headingChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_vehicle, &Vehicle::altitudeRelativeChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_vehicle, &Vehicle::pitchChanged, this, &BallisticCalculator::_updateWindFromAttitude);
-        connect(_vehicle, &Vehicle::rollChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        connect(_vehicle->heading(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_vehicle->altitudeRelative(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_vehicle->pitch(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        connect(_vehicle->roll(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
     }
 
     if (_ballisticSettings) {
@@ -310,10 +310,18 @@ void BallisticCalculator::setVehicle(Vehicle* vehicle)
     if (_vehicle) {
         disconnect(_vehicle, &Vehicle::rcChannelsChanged, this, &BallisticCalculator::_rcChannelsChanged);
         disconnect(_vehicle, &Vehicle::coordinateChanged, this, &BallisticCalculator::_updateTrajectory);
-        disconnect(_vehicle, &Vehicle::headingChanged, this, &BallisticCalculator::_updateTrajectory);
-        disconnect(_vehicle, &Vehicle::altitudeRelativeChanged, this, &BallisticCalculator::_updateTrajectory);
-        disconnect(_vehicle, &Vehicle::pitchChanged, this, &BallisticCalculator::_updateWindFromAttitude);
-        disconnect(_vehicle, &Vehicle::rollChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        if (_vehicle->heading()) {
+            disconnect(_vehicle->heading(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
+        }
+        if (_vehicle->altitudeRelative()) {
+            disconnect(_vehicle->altitudeRelative(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
+        }
+        if (_vehicle->pitch()) {
+            disconnect(_vehicle->pitch(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        }
+        if (_vehicle->roll()) {
+            disconnect(_vehicle->roll(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        }
     }
 
     // Устанавливаем новое транспортное средство
@@ -323,10 +331,10 @@ void BallisticCalculator::setVehicle(Vehicle* vehicle)
     if (_vehicle) {
         connect(_vehicle, &Vehicle::rcChannelsChanged, this, &BallisticCalculator::_rcChannelsChanged);
         connect(_vehicle, &Vehicle::coordinateChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_vehicle, &Vehicle::headingChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_vehicle, &Vehicle::altitudeRelativeChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_vehicle, &Vehicle::pitchChanged, this, &BallisticCalculator::_updateWindFromAttitude);
-        connect(_vehicle, &Vehicle::rollChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        connect(_vehicle->heading(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_vehicle->altitudeRelative(), &Fact::valueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_vehicle->pitch(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        connect(_vehicle->roll(), &Fact::valueChanged, this, &BallisticCalculator::_updateWindFromAttitude);
     }
 
     // Обновляем траекторию с новым транспортным средством

@@ -8,6 +8,34 @@ IMPLEMENT_SETTING_NAME_GROUP(BallisticCalculatorSettings)
     settingsGroup = QStringLiteral("BallisticCalculator");
 }
 
+// Реализация методов доступа к Fact
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, PayloadMass)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, VerticalDragCoefficient)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, HorizontalDragCoefficient)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, VerticalCrossSection)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, HorizontalCrossSection)
+
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindSpeed)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindDirection)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterEnabled)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterPeriod)
+
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxChannel)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMinHeight)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMaxHeight)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropHeight)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, GimbalPitch)
+
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, MarkerSize)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, MarkerOffsetX)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, MarkerOffsetY)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ShowTrajectory)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ReadyToDropEnabled)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, MaxDropWindSpeed)
+
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ActiveProfile)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, SavedProfiles)
+
 BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
     : SettingsGroup(settingsGroup, QString() /* root settings group */, parent)
 {
