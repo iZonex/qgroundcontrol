@@ -78,7 +78,7 @@ public:
     APMMavlinkStreamRateSettings*   apmMavlinkStreamRateSettings(void) { return _apmMavlinkStreamRateSettings; }
 #endif
     RemoteIDSettings*               remoteIDSettings            (void) { return _remoteIDSettings; }
-    BallisticCalculatorSettings*     ballisticCalculatorSettings  (void) { return _ballisticCalculatorSettings; }
+    BallisticCalculatorSettings*     ballisticCalculatorSettings  (void) { return nullptr; /* _ballisticCalculatorSettings; */ }
 
 private:
     AppSettings*                    _appSettings;

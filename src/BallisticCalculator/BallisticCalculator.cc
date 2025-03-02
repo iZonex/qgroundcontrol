@@ -8,10 +8,12 @@
 BallisticCalculator::BallisticCalculator(Vehicle* vehicle, QObject* parent)
     : QObject(parent)
     , _vehicle(vehicle)
-    , _ballisticSettings(qgcApp()->toolbox()->settingsManager()->ballisticCalculatorSettings())
+    , _ballisticSettings(nullptr)
     , _dropTime(0.0)
     , _isActive(false)
 {
+    _ballisticSettings = qgcApp()->toolbox()->settingsManager()->ballisticCalculatorSettings();
+    
     if (_vehicle) {
         connect(_vehicle, &Vehicle::rcChannelsChanged, this, &BallisticCalculator::_rcChannelsChanged);
         connect(_vehicle, &Vehicle::coordinateChanged, this, &BallisticCalculator::_updateTrajectory);
@@ -44,10 +46,12 @@ BallisticCalculator::BallisticCalculator(Vehicle* vehicle, QObject* parent)
 BallisticCalculator::BallisticCalculator(QObject* parent)
     : QObject(parent)
     , _vehicle(nullptr)
-    , _ballisticSettings(qgcApp()->toolbox()->settingsManager()->ballisticCalculatorSettings())
+    , _ballisticSettings(nullptr)
     , _dropTime(0.0)
     , _isActive(false)
 {
+    _ballisticSettings = qgcApp()->toolbox()->settingsManager()->ballisticCalculatorSettings();
+    
     if (_ballisticSettings) {
         connect(_ballisticSettings->WindSpeed(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         connect(_ballisticSettings->WindDirection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
@@ -128,6 +132,10 @@ QGeoCoordinate BallisticCalculator::calculateImpactPoint(const QGeoCoordinate& v
                                                         double windSpeed,
                                                         double windDirection)
 {
+    if (!_ballisticSettings) {
+        return vehiclePosition;
+    }
+    
     // Параметры груза
     double mass = _ballisticSettings->PayloadMass()->rawValue().toDouble() / 1000.0;
     double vertDragCoef = _ballisticSettings->VerticalDragCoefficient()->rawValue().toDouble();

@@ -59,5 +59,5 @@ void SettingsManager::setToolbox(QGCToolbox *toolbox)
     _apmMavlinkStreamRateSettings = new APMMavlinkStreamRateSettings(this);
 #endif
     _remoteIDSettings =             new RemoteIDSettings            (this);
-    _ballisticCalculatorSettings = new BallisticCalculatorSettings(this);
+    // _ballisticCalculatorSettings = new BallisticCalculatorSettings(this);
 }
