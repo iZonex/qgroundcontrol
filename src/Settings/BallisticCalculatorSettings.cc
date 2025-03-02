@@ -2,10 +2,11 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QQmlEngine>
 
-IMPLEMENT_SETTING_NAME_GROUP(BallisticCalculatorSettings)
+DECLARE_SETTINGGROUP(BallisticCalculatorSettings, "BallisticCalculator")
 {
-    settingsGroup = QStringLiteral("BallisticCalculator");
+    QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
 }
 
 // Реализация методов доступа к Fact
