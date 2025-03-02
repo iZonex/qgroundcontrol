@@ -39,6 +39,7 @@ class QGCCameraManager;
 class QGCCameraControl;
 class QQuickItem;
 class InstrumentValueAreaController;
+class QmlComponentInfo;
 
 class QGCCorePlugin : public QGCTool
 {
@@ -215,6 +216,11 @@ protected:
     QGCCameraManager*   _cameraManager  = nullptr;
     QGCCameraControl*   _currentCamera  = nullptr;
     QVariantList        _toolBarIndicatorList;
+    QmlComponentInfo*   pMicrohard                = nullptr;
+    QmlComponentInfo*   pMAVLink                  = nullptr;
+    QmlComponentInfo*   pRemoteID                 = nullptr;
+    QmlComponentInfo*   pBallisticCalculator      = nullptr;
+    QmlComponentInfo*   pConsole                  = nullptr;
 
 private:
     QGCCorePlugin_p*    _p;

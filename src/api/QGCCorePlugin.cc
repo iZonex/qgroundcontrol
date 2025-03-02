@@ -69,6 +69,8 @@ public:
 #endif
         if(pRemoteID)
             delete pRemoteID;
+        if(pBallisticCalculator)
+            delete pBallisticCalculator;
         if(defaultOptions)
             delete defaultOptions;
     }
@@ -91,6 +93,7 @@ public:
     QmlComponentInfo* pQmlTest                  = nullptr;
 #endif
     QmlComponentInfo* pRemoteID                  = nullptr;
+    QmlComponentInfo* pBallisticCalculator        = nullptr;
 
     QGCOptions*         defaultOptions          = nullptr;
     QVariantList        settingsList;
@@ -156,8 +159,13 @@ QVariantList &QGCCorePlugin::settingsPages()
                                             QUrl::fromUserInput("qrc:/res/waves.svg"));
         _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pMAVLink)));
         _p->pRemoteID = new QmlComponentInfo(tr("Remote ID"),
-                                            QUrl::fromUserInput("qrc:/qml/RemoteIDSettings.qml"));
+                                            QUrl::fromUserInput("qrc:/qml/RemoteIDSettings.qml"),
+                                            QUrl::fromUserInput(""));
         _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pRemoteID)));
+        _p->pBallisticCalculator = new QmlComponentInfo(tr("Ballistic Calculator"),
+                                            QUrl::fromUserInput("qrc:/qml/BallisticCalculatorSettings.qml"),
+                                            QUrl::fromUserInput(""));
+        _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pBallisticCalculator)));
         _p->pConsole = new QmlComponentInfo(tr("Console"),
                                             QUrl::fromUserInput("qrc:/qml/QGroundControl/Controls/AppMessages.qml"));
         _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pConsole)));
