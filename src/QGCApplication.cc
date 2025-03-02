@@ -552,6 +552,9 @@ void QGCApplication::_initCommon()
 
     // Register BallisticCalculator
     qmlRegisterSingletonInstance<BallisticCalculator>(kQGCVehicle, 1, 0, "BallisticCalculator", _toolbox->ballisticCalculator());
+    
+    // Регистрируем модуль QGroundControl.BallisticCalculator
+    qmlRegisterSingletonInstance<BallisticCalculator>("QGroundControl.BallisticCalculator", 1, 0, "BallisticCalculator", _toolbox->ballisticCalculator());
 }
 
 bool QGCApplication::_initForNormalAppBoot()
