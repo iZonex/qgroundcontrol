@@ -4,15 +4,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-// Макрос для объявления константных методов доступа к Fact
-#define DEFINE_SETTINGFACT_CONST(NAME) \
-    private: \
-    SettingsFact* _ ## NAME ## Fact = nullptr; \
-    public: \
-    static const char* NAME ## Name; \
-    Q_PROPERTY(Fact* NAME READ NAME CONSTANT) \
-    Fact* NAME() const;
-
 class BallisticCalculatorSettings : public SettingsGroup
 {
     Q_OBJECT
@@ -68,11 +59,11 @@ public:
     Q_INVOKABLE void saveCurrentProfile(const QString& name);
     Q_INVOKABLE void loadProfile(const QString& name);
     Q_INVOKABLE void deleteProfile(const QString& name);
-    Q_INVOKABLE QStringList getProfileList() const;
-    Q_INVOKABLE bool isReadyToDrop() const;
+    Q_INVOKABLE QStringList getProfileList();
+    Q_INVOKABLE bool isReadyToDrop();
 
 private:
-    QJsonObject loadProfileFromJson(const QString& name) const;
-    QJsonObject getCurrentProfileData() const;
+    QJsonObject loadProfileFromJson(const QString& name);
+    QJsonObject getCurrentProfileData();
     void applyProfileData(const QJsonObject& profile);
 }; 

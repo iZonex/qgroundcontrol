@@ -18,7 +18,7 @@ BallisticCalculatorSettings::~BallisticCalculatorSettings()
 {
 }
 
-// Используем макрос DECLARE_SETTINGSFACT для всех настроек
+// Используем стандартный макрос для всех настроек
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, PayloadMass)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, VerticalDragCoefficient)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, HorizontalDragCoefficient)
@@ -80,7 +80,7 @@ void BallisticCalculatorSettings::deleteProfile(const QString& name)
     }
 }
 
-bool BallisticCalculatorSettings::isReadyToDrop() const
+bool BallisticCalculatorSettings::isReadyToDrop()
 {
     if (!ReadyToDropEnabled()->rawValue().toBool()) {
         return true;
@@ -92,7 +92,7 @@ bool BallisticCalculatorSettings::isReadyToDrop() const
     return windSpeed <= maxWindSpeed;
 }
 
-QStringList BallisticCalculatorSettings::getProfileList() const
+QStringList BallisticCalculatorSettings::getProfileList()
 {
     QJsonDocument doc = QJsonDocument::fromJson(SavedProfiles()->rawValue().toString().toUtf8());
     QJsonObject profiles = doc.object();
@@ -103,7 +103,7 @@ QStringList BallisticCalculatorSettings::getProfileList() const
     return result;
 }
 
-QJsonObject BallisticCalculatorSettings::getCurrentProfileData() const
+QJsonObject BallisticCalculatorSettings::getCurrentProfileData()
 {
     QJsonObject profile;
     
@@ -120,7 +120,7 @@ QJsonObject BallisticCalculatorSettings::getCurrentProfileData() const
     return profile;
 }
 
-QJsonObject BallisticCalculatorSettings::loadProfileFromJson(const QString& name) const
+QJsonObject BallisticCalculatorSettings::loadProfileFromJson(const QString& name)
 {
     QJsonDocument doc = QJsonDocument::fromJson(SavedProfiles()->rawValue().toString().toUtf8());
     QJsonObject profiles = doc.object();
