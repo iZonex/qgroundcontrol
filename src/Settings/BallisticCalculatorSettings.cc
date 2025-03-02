@@ -1,90 +1,50 @@
 #include "BallisticCalculatorSettings.h"
+#include <QLoggingCategory>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QQmlEngine>
 #include <QtQml>
 
-// Макрос для объявления константных методов доступа к Fact
+// Макрос для определения константных методов доступа к Fact
 #define DECLARE_SETTINGSFACT_CONST(CLASS, NAME) \
     const char* CLASS::NAME ## Name = #NAME; \
     Fact* CLASS::NAME() const \
     { \
-        if (!_ ## NAME ## Fact) { \
+        if (!const_cast<CLASS*>(this)->_ ## NAME ## Fact) { \
             const_cast<CLASS*>(this)->_ ## NAME ## Fact = const_cast<CLASS*>(this)->_createSettingsFact(NAME ## Name); \
         } \
-        return _ ## NAME ## Fact; \
+        return const_cast<CLASS*>(this)->_ ## NAME ## Fact; \
     }
 
-// Объявление статических переменных и конструктора
+// Используем правильное имя в макросе - первый параметр должен быть "BallisticCalculator"
 const char* BallisticCalculatorSettings::name = "BallisticCalculator";
 const char* BallisticCalculatorSettings::settingsGroup = "BallisticCalculator";
 
 BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
     : SettingsGroup(name, settingsGroup, parent)
 {
-    qmlRegisterUncreatableType<BallisticCalculatorSettings>("QGroundControl.SettingsManager", 1, 0, "BallisticCalculatorSettings", "Reference only");
-    
-    // Создаем факты при инициализации
-    PayloadMass();
-    VerticalDragCoefficient();
-    HorizontalDragCoefficient();
-    VerticalCrossSection();
-    HorizontalCrossSection();
-    
-    WindSpeed();
-    WindDirection();
-    WindFilterEnabled();
-    WindFilterPeriod();
-    
-    AuxChannel();
-    AuxMinHeight();
-    AuxMaxHeight();
-    DropHeight();
-    GimbalPitch();
-    
-    MarkerSize();
-    MarkerOffsetX();
-    MarkerOffsetY();
-    ShowTrajectory();
-    ReadyToDropEnabled();
-    MaxDropWindSpeed();
-    
-    ActiveProfile();
-    SavedProfiles();
-    
     QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
+    qmlRegisterUncreatableType<BallisticCalculatorSettings>("QGroundControl.SettingsManager", 1, 0, "BallisticCalculatorSettings", "Reference only");
+
+    // Параметры груза
+    DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, PayloadMass)
+    DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, VerticalDragCoefficient)
+    DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, HorizontalDragCoefficient)
+    DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, VerticalCrossSection)
+    DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, HorizontalCrossSection)
+
+    // Параметры ветра
+    DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, WindSpeed)
+    DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, WindDirection)
+    DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, WindAltitude)
+
+    // Параметры сброса
+    DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, DropAltitude)
+    DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, DropSpeed)
+    DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, DropDirection)
 }
 
-// Реализация методов доступа к Fact
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, PayloadMass)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, VerticalDragCoefficient)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, HorizontalDragCoefficient)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, VerticalCrossSection)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, HorizontalCrossSection)
-
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, WindSpeed)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, WindDirection)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterEnabled)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterPeriod)
-
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxChannel)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMinHeight)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMaxHeight)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropHeight)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, GimbalPitch)
-
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MarkerSize)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MarkerOffsetX)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MarkerOffsetY)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ShowTrajectory)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, ReadyToDropEnabled)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MaxDropWindSpeed)
-
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ActiveProfile)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, SavedProfiles)
-
-// Реализация деструктора
 BallisticCalculatorSettings::~BallisticCalculatorSettings()
 {
     // Пустой деструктор, все очистится автоматически
