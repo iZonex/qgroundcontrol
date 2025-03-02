@@ -52,6 +52,7 @@
 #include "VehicleGeneratorFactGroup.h"
 #include "VehicleEFIFactGroup.h"
 
+class BallisticCalculator;
 class Actuators;
 class EventHandler;
 class UAS;
@@ -1445,6 +1446,7 @@ private:
     Actuators*                      _actuators                  = nullptr;
     RemoteIDManager*                _remoteIDManager            = nullptr;
     StandardModes*                  _standardModes              = nullptr;
+    BallisticCalculator*            _ballisticCalculator        = nullptr;
 
     static const char* _rollFactName;
     static const char* _pitchFactName;

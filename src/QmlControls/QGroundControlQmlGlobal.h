@@ -38,6 +38,7 @@ class MicrohardManager;
 
 class QGCToolbox;
 class LinkManager;
+class BallisticCalculator;
 
 class QGroundControlQmlGlobal : public QGCTool
 {
@@ -83,6 +84,7 @@ public:
     Q_PROPERTY(QGeoCoordinate       flightMapPosition       READ    flightMapPosition       WRITE setFlightMapPosition  NOTIFY flightMapPositionChanged)
     Q_PROPERTY(double               flightMapZoom           READ    flightMapZoom           WRITE setFlightMapZoom      NOTIFY flightMapZoomChanged)
     Q_PROPERTY(double               flightMapInitialZoom    MEMBER  _flightMapInitialZoom   CONSTANT)   ///< Zoom level to use when either gcs or vehicle shows up for first time
+    Q_PROPERTY(BallisticCalculator* ballisticCalculator     READ    ballisticCalculator     CONSTANT)
 
     Q_PROPERTY(QString  parameterFileExtension  READ parameterFileExtension CONSTANT)
     Q_PROPERTY(QString  missionFileExtension    READ missionFileExtension   CONSTANT)
@@ -117,7 +119,6 @@ public:
 #endif
 
     Q_PROPERTY(QObject* adsbVehicleManager      READ adsbVehicleManager      CONSTANT)
-    Q_PROPERTY(QObject* ballisticCalculator     READ ballisticCalculator     CONSTANT)
 
     Q_INVOKABLE void    saveGlobalSetting       (const QString& key, const QString& value);
     Q_INVOKABLE QString loadGlobalSetting       (const QString& key, const QString& defaultValue);
