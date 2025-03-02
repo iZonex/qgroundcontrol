@@ -13,7 +13,10 @@ class BallisticCalculator : public QObject
 
 public:
     explicit BallisticCalculator(Vehicle* vehicle, QObject* parent = nullptr);
+    explicit BallisticCalculator(QObject* parent = nullptr);
     ~BallisticCalculator();
+
+    void setVehicle(Vehicle* vehicle);
 
     Q_PROPERTY(QGeoCoordinate targetPoint READ targetPoint NOTIFY targetPointChanged)
     Q_PROPERTY(double dropTime READ dropTime NOTIFY dropTimeChanged)

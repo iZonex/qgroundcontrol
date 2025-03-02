@@ -33,6 +33,23 @@ BallisticCalculator::BallisticCalculator(Vehicle* vehicle, QObject* parent)
     }
 }
 
+BallisticCalculator::BallisticCalculator(QObject* parent)
+    : QObject(parent)
+    , _vehicle(nullptr)
+    , _ballisticSettings(qgcApp()->toolbox()->settingsManager()->ballisticCalculatorSettings())
+    , _dropTime(0.0)
+    , _isActive(false)
+{
+    if (_ballisticSettings) {
+        connect(_ballisticSettings->windSpeedFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->windDirectionFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->payloadMassFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->verticalDragCoefficientFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->horizontalDragCoefficientFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->verticalCrossSectionFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+    }
+}
+
 BallisticCalculator::~BallisticCalculator()
 {
     if (_vehicle) {
@@ -285,4 +302,38 @@ void BallisticCalculator::_updateTrajectory()
 
     _updateWindFromAttitude();
     calculateTrajectory();
+}
+
+void BallisticCalculator::setVehicle(Vehicle* vehicle)
+{
+    // Отключаем соединения со старым транспортным средством, если оно существует
+    if (_vehicle) {
+        disconnect(_vehicle, &Vehicle::rcChannelsChanged, this, &BallisticCalculator::_rcChannelsChanged);
+        disconnect(_vehicle, &Vehicle::coordinateChanged, this, &BallisticCalculator::_updateTrajectory);
+        disconnect(_vehicle, &Vehicle::headingChanged, this, &BallisticCalculator::_updateTrajectory);
+        disconnect(_vehicle, &Vehicle::altitudeRelativeChanged, this, &BallisticCalculator::_updateTrajectory);
+        disconnect(_vehicle, &Vehicle::pitchChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        disconnect(_vehicle, &Vehicle::rollChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+    }
+
+    // Устанавливаем новое транспортное средство
+    _vehicle = vehicle;
+
+    // Подключаем сигналы к новому транспортному средству, если оно существует
+    if (_vehicle) {
+        connect(_vehicle, &Vehicle::rcChannelsChanged, this, &BallisticCalculator::_rcChannelsChanged);
+        connect(_vehicle, &Vehicle::coordinateChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_vehicle, &Vehicle::headingChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_vehicle, &Vehicle::altitudeRelativeChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_vehicle, &Vehicle::pitchChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+        connect(_vehicle, &Vehicle::rollChanged, this, &BallisticCalculator::_updateWindFromAttitude);
+    }
+
+    // Обновляем траекторию с новым транспортным средством
+    _updateTrajectory();
+}
+
+QGeoCoordinate BallisticCalculator::targetPoint() const
+{
+    return _targetPoint;
 } 

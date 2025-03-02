@@ -90,7 +90,7 @@ private:
     void setChildToolboxes(void);
     void _scanAndLoadPlugins(QGCApplication *app);
 
-
+    QGCApplication*             _app                    = nullptr;
     AudioOutput*                _audioOutput            = nullptr;
     FactSystem*                 _factSystem             = nullptr;
     FirmwarePluginManager*      _firmwarePluginManager  = nullptr;
@@ -122,7 +122,7 @@ private:
     MicrohardManager*           _microhardManager       = nullptr;
 #endif
 
-    BallisticCalculator*        _ballisticCalculator;
+    BallisticCalculator*        _ballisticCalculator    = nullptr;
 
     friend class QGCApplication;
 };

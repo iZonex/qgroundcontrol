@@ -100,7 +100,16 @@ QGCToolbox::QGCToolbox(QGCApplication* app)
     _microhardManager       = new MicrohardManager          (app, this);
 #endif
 
-    _ballisticCalculator = new BallisticCalculator(_multiVehicleManager->activeVehicle(), this);
+    _ballisticCalculator = new BallisticCalculator(this);
+    
+    // Устанавливаем текущее активное транспортное средство, если оно существует
+    if (_multiVehicleManager->activeVehicle()) {
+        _ballisticCalculator->setVehicle(_multiVehicleManager->activeVehicle());
+    }
+    
+    // Подключаем сигнал изменения активного транспортного средства
+    connect(_multiVehicleManager, &MultiVehicleManager::activeVehicleChanged, 
+            _ballisticCalculator, &BallisticCalculator::setVehicle);
 }
 
 QGCToolbox::~QGCToolbox()
