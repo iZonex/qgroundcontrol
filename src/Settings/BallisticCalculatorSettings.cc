@@ -360,4 +360,6 @@ void BallisticCalculatorSettings::applyProfileData(const QJsonObject& profile)
         MarkerOffsetX()->setRawValue(profile["markerOffsetX"].toInt());
     if (profile.contains("markerOffsetY"))
         MarkerOffsetY()->setRawValue(profile["markerOffsetY"].toInt());
-} 
+}
+
+#include "moc_BallisticCalculatorSettings.cpp" 
