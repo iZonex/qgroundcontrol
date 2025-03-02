@@ -13,11 +13,6 @@ DECLARE_SETTINGGROUP(BallisticCalculator, "BallisticCalculator")
     qmlRegisterUncreatableType<BallisticCalculatorSettings>("QGroundControl.SettingsManager", 1, 0, "BallisticCalculatorSettings", "Reference only");
 }
 
-// Деструктор
-BallisticCalculatorSettings::~BallisticCalculatorSettings()
-{
-}
-
 // Используем стандартный макрос для всех настроек
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, PayloadMass)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, VerticalDragCoefficient)

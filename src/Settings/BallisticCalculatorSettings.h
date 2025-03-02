@@ -10,7 +10,6 @@ class BallisticCalculatorSettings : public SettingsGroup
 
 public:
     BallisticCalculatorSettings(QObject* parent = nullptr);
-    virtual ~BallisticCalculatorSettings();
 
     DEFINE_SETTING_NAME_GROUP()
 
