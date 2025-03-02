@@ -35,6 +35,7 @@ public:
     DEFINE_SETTINGFACT_CONST(WindDirection)
     DEFINE_SETTINGFACT(WindFilterEnabled)
     DEFINE_SETTINGFACT(WindFilterPeriod)
+    DEFINE_SETTINGFACT_CONST(WindAltitude)
 
     // Параметры сброса
     DEFINE_SETTINGFACT(AuxChannel)
@@ -42,6 +43,9 @@ public:
     DEFINE_SETTINGFACT(AuxMaxHeight)
     DEFINE_SETTINGFACT(DropHeight)
     DEFINE_SETTINGFACT(GimbalPitch)
+    DEFINE_SETTINGFACT_CONST(DropAltitude)
+    DEFINE_SETTINGFACT_CONST(DropSpeed)
+    DEFINE_SETTINGFACT_CONST(DropDirection)
 
     // Параметры OSD
     DEFINE_SETTINGFACT_CONST(MarkerSize)
