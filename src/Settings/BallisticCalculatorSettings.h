@@ -57,34 +57,6 @@ public:
     Q_INVOKABLE QStringList getProfileList() const;
     Q_INVOKABLE bool isReadyToDrop() const;
 
-    // Методы доступа к Fact объектам с именами вида xxxFact()
-    Fact* payloadMassFact() { return PayloadMass(); }
-    Fact* verticalDragCoefficientFact() { return VerticalDragCoefficient(); }
-    Fact* horizontalDragCoefficientFact() { return HorizontalDragCoefficient(); }
-    Fact* verticalCrossSectionFact() { return VerticalCrossSection(); }
-    Fact* horizontalCrossSectionFact() { return HorizontalCrossSection(); }
-    
-    Fact* windSpeedFact() { return WindSpeed(); }
-    Fact* windDirectionFact() { return WindDirection(); }
-    Fact* windFilterEnabledFact() { return WindFilterEnabled(); }
-    Fact* windFilterPeriodFact() { return WindFilterPeriod(); }
-    
-    Fact* auxChannelFact() { return AuxChannel(); }
-    Fact* auxMinHeightFact() { return AuxMinHeight(); }
-    Fact* auxMaxHeightFact() { return AuxMaxHeight(); }
-    Fact* dropHeightFact() { return DropHeight(); }
-    Fact* gimbalPitchFact() { return GimbalPitch(); }
-    
-    Fact* markerSizeFact() { return MarkerSize(); }
-    Fact* markerOffsetXFact() { return MarkerOffsetX(); }
-    Fact* markerOffsetYFact() { return MarkerOffsetY(); }
-    Fact* showTrajectoryFact() { return ShowTrajectory(); }
-    Fact* readyToDropEnabledFact() { return ReadyToDropEnabled(); }
-    Fact* maxDropWindSpeedFact() { return MaxDropWindSpeed(); }
-    
-    Fact* activeProfileFact() { return ActiveProfile(); }
-    Fact* savedProfilesFact() { return SavedProfiles(); }
-
 private:
     void saveProfileToJson(const QString& name, const QJsonObject& profile);
     QJsonObject loadProfileFromJson(const QString& name) const;

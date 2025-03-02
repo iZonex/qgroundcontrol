@@ -22,14 +22,14 @@ BallisticCalculator::BallisticCalculator(Vehicle* vehicle, QObject* parent)
     }
 
     if (_ballisticSettings) {
-        connect(_ballisticSettings->windSpeedFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->windDirectionFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->payloadMassFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->verticalDragCoefficientFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->horizontalDragCoefficientFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->verticalCrossSectionFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->horizontalCrossSectionFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->gimbalPitchFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->WindSpeed(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->WindDirection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->PayloadMass(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->VerticalDragCoefficient(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->HorizontalDragCoefficient(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->VerticalCrossSection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->HorizontalCrossSection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->GimbalPitch(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
     }
 }
 
@@ -41,12 +41,12 @@ BallisticCalculator::BallisticCalculator(QObject* parent)
     , _isActive(false)
 {
     if (_ballisticSettings) {
-        connect(_ballisticSettings->windSpeedFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->windDirectionFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->payloadMassFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->verticalDragCoefficientFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->horizontalDragCoefficientFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        connect(_ballisticSettings->verticalCrossSectionFact(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->WindSpeed(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->WindDirection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->PayloadMass(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->VerticalDragCoefficient(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->HorizontalDragCoefficient(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        connect(_ballisticSettings->VerticalCrossSection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
     }
 }
 
@@ -89,8 +89,8 @@ void BallisticCalculator::calculateTrajectory()
     double altitude = _vehicle->altitudeRelative()->rawValue().toDouble();
 
     // Получаем данные о ветре из настроек
-    double windSpeed = _ballisticSettings->windSpeedFact()->rawValue().toDouble();
-    double windDirection = _ballisticSettings->windDirectionFact()->rawValue().toDouble() * M_PI / 180.0;
+    double windSpeed = _ballisticSettings->WindSpeed()->rawValue().toDouble();
+    double windDirection = _ballisticSettings->WindDirection()->rawValue().toDouble() * M_PI / 180.0;
 
     // Рассчитываем точку падения
     QGeoCoordinate vehiclePosition = _vehicle->coordinate();
@@ -111,11 +111,11 @@ QGeoCoordinate BallisticCalculator::calculateImpactPoint(const QGeoCoordinate& v
                                                         double windDirection)
 {
     // Параметры груза
-    double mass = _ballisticSettings->payloadMassFact()->rawValue().toDouble() / 1000.0;
-    double vertDragCoef = _ballisticSettings->verticalDragCoefficientFact()->rawValue().toDouble();
-    double horizDragCoef = _ballisticSettings->horizontalDragCoefficientFact()->rawValue().toDouble();
-    double vertCrossSection = _ballisticSettings->verticalCrossSectionFact()->rawValue().toDouble() / 10000.0;
-    double horizCrossSection = _ballisticSettings->horizontalCrossSectionFact()->rawValue().toDouble() / 10000.0;
+    double mass = _ballisticSettings->PayloadMass()->rawValue().toDouble() / 1000.0;
+    double vertDragCoef = _ballisticSettings->VerticalDragCoefficient()->rawValue().toDouble();
+    double horizDragCoef = _ballisticSettings->HorizontalDragCoefficient()->rawValue().toDouble();
+    double vertCrossSection = _ballisticSettings->VerticalCrossSection()->rawValue().toDouble() / 10000.0;
+    double horizCrossSection = _ballisticSettings->HorizontalCrossSection()->rawValue().toDouble() / 10000.0;
 
     // Константы для расчета
     const double dt = 0.01;  // шаг времени для интегрирования
@@ -186,15 +186,15 @@ QVariantList BallisticCalculator::calculateTrajectoryPoints()
     if (!_vehicle || !_ballisticSettings) return points;
 
     // Параметры груза
-    double mass = _ballisticSettings->payloadMassFact()->rawValue().toDouble() / 1000.0;
-    double vertDragCoef = _ballisticSettings->verticalDragCoefficientFact()->rawValue().toDouble();
-    double horizDragCoef = _ballisticSettings->horizontalDragCoefficientFact()->rawValue().toDouble();
-    double vertCrossSection = _ballisticSettings->verticalCrossSectionFact()->rawValue().toDouble() / 10000.0;
-    double horizCrossSection = _ballisticSettings->horizontalCrossSectionFact()->rawValue().toDouble() / 10000.0;
+    double mass = _ballisticSettings->PayloadMass()->rawValue().toDouble() / 1000.0;
+    double vertDragCoef = _ballisticSettings->VerticalDragCoefficient()->rawValue().toDouble();
+    double horizDragCoef = _ballisticSettings->HorizontalDragCoefficient()->rawValue().toDouble();
+    double vertCrossSection = _ballisticSettings->VerticalCrossSection()->rawValue().toDouble() / 10000.0;
+    double horizCrossSection = _ballisticSettings->HorizontalCrossSection()->rawValue().toDouble() / 10000.0;
 
     // Получаем данные о ветре
-    double windSpeed = _ballisticSettings->windSpeedFact()->rawValue().toDouble();
-    double windDirection = _ballisticSettings->windDirectionFact()->rawValue().toDouble() * M_PI / 180.0;
+    double windSpeed = _ballisticSettings->WindSpeed()->rawValue().toDouble();
+    double windDirection = _ballisticSettings->WindDirection()->rawValue().toDouble() * M_PI / 180.0;
 
     // Начальные условия
     double x = 0;
@@ -252,15 +252,15 @@ void BallisticCalculator::_rcChannelsChanged(int channelCount, int pwmValues[])
         return;
     }
 
-    int auxChannel = _ballisticSettings->auxChannelFact()->rawValue().toInt() - 1;
+    int auxChannel = _ballisticSettings->AuxChannel()->rawValue().toInt() - 1;
     if (auxChannel >= 0 && auxChannel < channelCount) {
         int pwmValue = pwmValues[auxChannel];
-        double minHeight = _ballisticSettings->auxMinHeightFact()->rawValue().toDouble();
-        double maxHeight = _ballisticSettings->auxMaxHeightFact()->rawValue().toDouble();
+        double minHeight = _ballisticSettings->AuxMinHeight()->rawValue().toDouble();
+        double maxHeight = _ballisticSettings->AuxMaxHeight()->rawValue().toDouble();
         double normalizedPwm = (pwmValue - 1000.0) / 1000.0;
         double height = minHeight + normalizedPwm * (maxHeight - minHeight);
         
-        _ballisticSettings->dropHeightFact()->setRawValue(height);
+        _ballisticSettings->DropHeight()->setRawValue(height);
     }
 }
 
@@ -283,8 +283,8 @@ void BallisticCalculator::_updateWindFromAttitude()
         windDirection += 360.0;
     }
     
-    _ballisticSettings->windSpeedFact()->setRawValue(windSpeed);
-    _ballisticSettings->windDirectionFact()->setRawValue(windDirection);
+    _ballisticSettings->WindSpeed()->setRawValue(windSpeed);
+    _ballisticSettings->WindDirection()->setRawValue(windDirection);
 }
 
 void BallisticCalculator::_updateTrajectory()

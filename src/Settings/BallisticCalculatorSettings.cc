@@ -72,12 +72,12 @@ BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
 
 void BallisticCalculatorSettings::saveCurrentProfile(const QString& name)
 {
-    QJsonDocument doc = QJsonDocument::fromJson(savedProfilesFact()->rawValue().toString().toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(SavedProfiles()->rawValue().toString().toUtf8());
     QJsonObject profiles = doc.object();
     
     profiles[name] = getCurrentProfileData();
-    savedProfilesFact()->setRawValue(QString(QJsonDocument(profiles).toJson()));
-    activeProfileFact()->setRawValue(name);
+    SavedProfiles()->setRawValue(QString(QJsonDocument(profiles).toJson()));
+    ActiveProfile()->setRawValue(name);
 }
 
 void BallisticCalculatorSettings::loadProfile(const QString& name)
@@ -85,7 +85,7 @@ void BallisticCalculatorSettings::loadProfile(const QString& name)
     QJsonObject profile = loadProfileFromJson(name);
     if (!profile.isEmpty()) {
         applyProfileData(profile);
-        activeProfileFact()->setRawValue(name);
+        ActiveProfile()->setRawValue(name);
     }
 }
 
@@ -93,32 +93,32 @@ void BallisticCalculatorSettings::deleteProfile(const QString& name)
 {
     if (name == "Default") return;
 
-    QJsonDocument doc = QJsonDocument::fromJson(savedProfilesFact()->rawValue().toString().toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(SavedProfiles()->rawValue().toString().toUtf8());
     QJsonObject profiles = doc.object();
     
     profiles.remove(name);
-    savedProfilesFact()->setRawValue(QString(QJsonDocument(profiles).toJson()));
+    SavedProfiles()->setRawValue(QString(QJsonDocument(profiles).toJson()));
     
-    if (activeProfileFact()->rawValue().toString() == name) {
-        activeProfileFact()->setRawValue("Default");
+    if (ActiveProfile()->rawValue().toString() == name) {
+        ActiveProfile()->setRawValue("Default");
     }
 }
 
 bool BallisticCalculatorSettings::isReadyToDrop() const
 {
-    if (!readyToDropEnabledFact()->rawValue().toBool()) {
+    if (!ReadyToDropEnabled()->rawValue().toBool()) {
         return true;
     }
 
-    double windSpeed = windSpeedFact()->rawValue().toDouble();
-    double maxWindSpeed = maxDropWindSpeedFact()->rawValue().toDouble();
+    double windSpeed = WindSpeed()->rawValue().toDouble();
+    double maxWindSpeed = MaxDropWindSpeed()->rawValue().toDouble();
 
     return windSpeed <= maxWindSpeed;
 }
 
 QStringList BallisticCalculatorSettings::getProfileList() const
 {
-    QJsonDocument doc = QJsonDocument::fromJson(savedProfilesFact()->rawValue().toString().toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(SavedProfiles()->rawValue().toString().toUtf8());
     QJsonObject profiles = doc.object();
     
     QStringList result;
@@ -131,22 +131,22 @@ QJsonObject BallisticCalculatorSettings::getCurrentProfileData() const
 {
     QJsonObject profile;
     
-    profile["payloadMass"] = payloadMassFact()->rawValue().toDouble();
-    profile["verticalDragCoefficient"] = verticalDragCoefficientFact()->rawValue().toDouble();
-    profile["horizontalDragCoefficient"] = horizontalDragCoefficientFact()->rawValue().toDouble();
-    profile["verticalCrossSection"] = verticalCrossSectionFact()->rawValue().toDouble();
-    profile["horizontalCrossSection"] = horizontalCrossSectionFact()->rawValue().toDouble();
+    profile["payloadMass"] = PayloadMass()->rawValue().toDouble();
+    profile["verticalDragCoefficient"] = VerticalDragCoefficient()->rawValue().toDouble();
+    profile["horizontalDragCoefficient"] = HorizontalDragCoefficient()->rawValue().toDouble();
+    profile["verticalCrossSection"] = VerticalCrossSection()->rawValue().toDouble();
+    profile["horizontalCrossSection"] = HorizontalCrossSection()->rawValue().toDouble();
     
-    profile["markerSize"] = markerSizeFact()->rawValue().toInt();
-    profile["markerOffsetX"] = markerOffsetXFact()->rawValue().toInt();
-    profile["markerOffsetY"] = markerOffsetYFact()->rawValue().toInt();
+    profile["markerSize"] = MarkerSize()->rawValue().toInt();
+    profile["markerOffsetX"] = MarkerOffsetX()->rawValue().toInt();
+    profile["markerOffsetY"] = MarkerOffsetY()->rawValue().toInt();
     
     return profile;
 }
 
 QJsonObject BallisticCalculatorSettings::loadProfileFromJson(const QString& name) const
 {
-    QJsonDocument doc = QJsonDocument::fromJson(savedProfilesFact()->rawValue().toString().toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(SavedProfiles()->rawValue().toString().toUtf8());
     QJsonObject profiles = doc.object();
     
     return profiles.value(name).toObject();
@@ -155,20 +155,20 @@ QJsonObject BallisticCalculatorSettings::loadProfileFromJson(const QString& name
 void BallisticCalculatorSettings::applyProfileData(const QJsonObject& profile)
 {
     if (profile.contains("payloadMass"))
-        payloadMassFact()->setRawValue(profile["payloadMass"].toDouble());
+        PayloadMass()->setRawValue(profile["payloadMass"].toDouble());
     if (profile.contains("verticalDragCoefficient"))
-        verticalDragCoefficientFact()->setRawValue(profile["verticalDragCoefficient"].toDouble());
+        VerticalDragCoefficient()->setRawValue(profile["verticalDragCoefficient"].toDouble());
     if (profile.contains("horizontalDragCoefficient"))
-        horizontalDragCoefficientFact()->setRawValue(profile["horizontalDragCoefficient"].toDouble());
+        HorizontalDragCoefficient()->setRawValue(profile["horizontalDragCoefficient"].toDouble());
     if (profile.contains("verticalCrossSection"))
-        verticalCrossSectionFact()->setRawValue(profile["verticalCrossSection"].toDouble());
+        VerticalCrossSection()->setRawValue(profile["verticalCrossSection"].toDouble());
     if (profile.contains("horizontalCrossSection"))
-        horizontalCrossSectionFact()->setRawValue(profile["horizontalCrossSection"].toDouble());
+        HorizontalCrossSection()->setRawValue(profile["horizontalCrossSection"].toDouble());
     
     if (profile.contains("markerSize"))
-        markerSizeFact()->setRawValue(profile["markerSize"].toInt());
+        MarkerSize()->setRawValue(profile["markerSize"].toInt());
     if (profile.contains("markerOffsetX"))
-        markerOffsetXFact()->setRawValue(profile["markerOffsetX"].toInt());
+        MarkerOffsetX()->setRawValue(profile["markerOffsetX"].toInt());
     if (profile.contains("markerOffsetY"))
-        markerOffsetYFact()->setRawValue(profile["markerOffsetY"].toInt());
+        MarkerOffsetY()->setRawValue(profile["markerOffsetY"].toInt());
 } 
