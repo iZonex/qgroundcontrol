@@ -20,11 +20,11 @@ const char* BallisticCalculatorSettings::settingsGroup = "BallisticCalculator";
     }
 
 // Реализация методов доступа к Fact
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, PayloadMass)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, VerticalDragCoefficient)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, HorizontalDragCoefficient)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, VerticalCrossSection)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, HorizontalCrossSection)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, PayloadMass)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, VerticalDragCoefficient)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, HorizontalDragCoefficient)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, VerticalCrossSection)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, HorizontalCrossSection)
 
 DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, WindSpeed)
 DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, WindDirection)

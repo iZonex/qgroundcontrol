@@ -6,6 +6,9 @@
 
 // Макрос для объявления константных методов доступа к Fact
 #define DEFINE_SETTINGFACT_CONST(NAME) \
+    private: \
+    SettingsFact* _ ## NAME ## Fact = nullptr; \
+    public: \
     static const char* NAME ## Name; \
     Q_PROPERTY(Fact* NAME READ NAME CONSTANT) \
     Fact* NAME() const;
@@ -20,11 +23,11 @@ public:
     DEFINE_SETTING_NAME_GROUP()
 
     // Параметры груза
-    DEFINE_SETTINGFACT(PayloadMass)
-    DEFINE_SETTINGFACT(VerticalDragCoefficient)
-    DEFINE_SETTINGFACT(HorizontalDragCoefficient)
-    DEFINE_SETTINGFACT(VerticalCrossSection)
-    DEFINE_SETTINGFACT(HorizontalCrossSection)
+    DEFINE_SETTINGFACT_CONST(PayloadMass)
+    DEFINE_SETTINGFACT_CONST(VerticalDragCoefficient)
+    DEFINE_SETTINGFACT_CONST(HorizontalDragCoefficient)
+    DEFINE_SETTINGFACT_CONST(VerticalCrossSection)
+    DEFINE_SETTINGFACT_CONST(HorizontalCrossSection)
 
     // Параметры ветра
     DEFINE_SETTINGFACT_CONST(WindSpeed)
