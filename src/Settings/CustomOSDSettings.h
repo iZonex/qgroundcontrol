@@ -18,7 +18,8 @@ class CustomOSDSettings : public SettingsGroup
 public:
     CustomOSDSettings(QObject* parent = nullptr);
 
-    DEFINE_SETTING_NAME_GROUP()
+    static const char* name;
+    static const char* settingsGroup;
     
     DEFINE_SETTINGFACT(showHelloWorld)
     DEFINE_SETTINGFACT(showFlightInfo)

@@ -12,7 +12,11 @@
 #include <QQmlEngine>
 #include <QtQml>
 
-DECLARE_SETTINGGROUP(CustomOSD, "CustomOSD")
+const char* CustomOSDSettings::name = "CustomOSD";
+const char* CustomOSDSettings::settingsGroup = "CustomOSD";
+
+CustomOSDSettings::CustomOSDSettings(QObject* parent)
+    : SettingsGroup(name, settingsGroup, parent)
 {
     QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
     qmlRegisterUncreatableType<CustomOSDSettings>("QGroundControl.SettingsManager", 1, 0, "CustomOSDSettings", "Reference only");
