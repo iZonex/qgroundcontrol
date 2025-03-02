@@ -59,9 +59,6 @@ BallisticCalculator::BallisticCalculator(Vehicle* vehicle, QObject* parent)
         if (_ballisticSettings->HorizontalCrossSection() != nullptr) {
             connect(_ballisticSettings->HorizontalCrossSection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->GimbalPitch() != nullptr) {
-            connect(_ballisticSettings->GimbalPitch(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        }
         
         // Связываем настройку Enabled с активацией калькулятора
         if (_ballisticSettings->Enabled() != nullptr) {
@@ -113,9 +110,6 @@ BallisticCalculator::BallisticCalculator(QObject* parent)
         }
         if (_ballisticSettings->HorizontalCrossSection() != nullptr) {
             connect(_ballisticSettings->HorizontalCrossSection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
-        }
-        if (_ballisticSettings->GimbalPitch() != nullptr) {
-            connect(_ballisticSettings->GimbalPitch(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
         
         // Связываем настройку Enabled с активацией калькулятора
