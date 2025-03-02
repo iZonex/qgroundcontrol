@@ -36,48 +36,48 @@ Rectangle {
                                                QGroundControl.settingsManager.ballisticCalculatorSettings : null
     
     // Безопасное получение Fact объектов с проверкой на null и использованием правильных имен свойств
-    property Fact   _enabled:                  _settingsAvailable && _ballisticCalculatorSettings.enabled ? 
-                                               _ballisticCalculatorSettings.enabled : null
-    property Fact   _payloadMass:              _settingsAvailable && _ballisticCalculatorSettings.payloadMass ? 
-                                               _ballisticCalculatorSettings.payloadMass : null
-    property Fact   _verticalDragCoefficient:  _settingsAvailable && _ballisticCalculatorSettings.verticalDragCoefficient ? 
-                                               _ballisticCalculatorSettings.verticalDragCoefficient : null
-    property Fact   _horizontalDragCoefficient: _settingsAvailable && _ballisticCalculatorSettings.horizontalDragCoefficient ? 
-                                               _ballisticCalculatorSettings.horizontalDragCoefficient : null
-    property Fact   _verticalCrossSection:     _settingsAvailable && _ballisticCalculatorSettings.verticalCrossSection ? 
-                                               _ballisticCalculatorSettings.verticalCrossSection : null
-    property Fact   _horizontalCrossSection:   _settingsAvailable && _ballisticCalculatorSettings.horizontalCrossSection ? 
-                                               _ballisticCalculatorSettings.horizontalCrossSection : null
-    property Fact   _windSpeed:                _settingsAvailable && _ballisticCalculatorSettings.windSpeed ? 
-                                               _ballisticCalculatorSettings.windSpeed : null
-    property Fact   _windDirection:            _settingsAvailable && _ballisticCalculatorSettings.windDirection ? 
-                                               _ballisticCalculatorSettings.windDirection : null
+    property Fact   _enabled:                  _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled : null
+    property Fact   _payloadMass:              _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.payloadMass ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.payloadMass : null
+    property Fact   _verticalDragCoefficient:  _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.verticalDragCoefficient ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.verticalDragCoefficient : null
+    property Fact   _horizontalDragCoefficient: _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.horizontalDragCoefficient ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.horizontalDragCoefficient : null
+    property Fact   _verticalCrossSection:     _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.verticalCrossSection ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.verticalCrossSection : null
+    property Fact   _horizontalCrossSection:   _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.horizontalCrossSection ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.horizontalCrossSection : null
+    property Fact   _windSpeed:                _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.windSpeed ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.windSpeed : null
+    property Fact   _windDirection:            _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.windDirection ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.windDirection : null
     // Используем DropHeight вместо HeightMode, так как HeightMode не объявлен в BallisticCalculatorSettings.cc
     property int    _heightMode:               0  // Значение по умолчанию - фиксированная высота
-    property Fact   _fixedHeight:              _settingsAvailable && _ballisticCalculatorSettings.dropHeight ? 
-                                               _ballisticCalculatorSettings.dropHeight : null
-    property Fact   _auxChannel:               _settingsAvailable && _ballisticCalculatorSettings.auxChannel ? 
-                                               _ballisticCalculatorSettings.auxChannel : null
-    property Fact   _auxMinHeight:             _settingsAvailable && _ballisticCalculatorSettings.auxMinHeight ? 
-                                               _ballisticCalculatorSettings.auxMinHeight : null
-    property Fact   _auxMaxHeight:             _settingsAvailable && _ballisticCalculatorSettings.auxMaxHeight ? 
-                                               _ballisticCalculatorSettings.auxMaxHeight : null
-    property Fact   _cameraOffset:             _settingsAvailable && _ballisticCalculatorSettings.cameraOffset ? 
-                                               _ballisticCalculatorSettings.cameraOffset : null
-    property Fact   _showTrajectory:           _settingsAvailable && _ballisticCalculatorSettings.showTrajectory ? 
-                                               _ballisticCalculatorSettings.showTrajectory : null
-    property Fact   _calibrationMode:          _settingsAvailable && _ballisticCalculatorSettings.calibrationMode ? 
-                                               _ballisticCalculatorSettings.calibrationMode : null
-    property Fact   _calibrationStep:          _settingsAvailable && _ballisticCalculatorSettings.calibrationStep ? 
-                                               _ballisticCalculatorSettings.calibrationStep : null
-    property Fact   _markerSize:               _settingsAvailable && _ballisticCalculatorSettings.markerSize ? 
-                                               _ballisticCalculatorSettings.markerSize : null
-    property Fact   _markerOffsetX:            _settingsAvailable && _ballisticCalculatorSettings.markerOffsetX ? 
-                                               _ballisticCalculatorSettings.markerOffsetX : null
-    property Fact   _markerOffsetY:            _settingsAvailable && _ballisticCalculatorSettings.markerOffsetY ? 
-                                               _ballisticCalculatorSettings.markerOffsetY : null
-    property Fact   _gimbalPitch:              _settingsAvailable && _ballisticCalculatorSettings.gimbalPitch ? 
-                                               _ballisticCalculatorSettings.gimbalPitch : null
+    property Fact   _fixedHeight:              _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.dropHeight ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.dropHeight : null
+    property Fact   _auxChannel:               _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.auxChannel ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.auxChannel : null
+    property Fact   _auxMinHeight:             _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.auxMinHeight ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.auxMinHeight : null
+    property Fact   _auxMaxHeight:             _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.auxMaxHeight ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.auxMaxHeight : null
+    property Fact   _cameraOffset:             _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.cameraOffset ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.cameraOffset : null
+    property Fact   _showTrajectory:           _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.showTrajectory ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.showTrajectory : null
+    property Fact   _calibrationMode:          _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.calibrationMode ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.calibrationMode : null
+    property Fact   _calibrationStep:          _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.calibrationStep ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.calibrationStep : null
+    property Fact   _markerSize:               _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.markerSize ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.markerSize : null
+    property Fact   _markerOffsetX:            _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.markerOffsetX ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.markerOffsetX : null
+    property Fact   _markerOffsetY:            _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.markerOffsetY ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.markerOffsetY : null
+    property Fact   _gimbalPitch:              _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.gimbalPitch ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings.gimbalPitch : null
 
     property real   _labelWidth:                   ScreenTools.defaultFontPixelWidth * 20
     property real   _valueFieldWidth:              ScreenTools.defaultFontPixelWidth * 20
@@ -95,6 +95,26 @@ Rectangle {
     // Функция для безопасного получения значения
     function safeRawValue(fact, defaultValue) {
         return fact ? fact.rawValue : defaultValue;
+    }
+
+    // Отладочная информация при загрузке компонента
+    Component.onCompleted: {
+        console.log("BallisticCalculatorSettings загружен")
+        console.log("_settingsAvailable:", _settingsAvailable)
+        if (_enabled) {
+            console.log("_enabled.rawValue:", _enabled.rawValue)
+            console.log("_enabled.value:", _enabled.value)
+        } else {
+            console.log("_enabled is null")
+        }
+    }
+
+    // Отслеживание изменений в _enabled
+    Connections {
+        target: _enabled
+        onRawValueChanged: {
+            console.log("_enabled.rawValue изменено на:", _enabled.rawValue)
+        }
     }
 
     QGCFlickable {
@@ -146,11 +166,12 @@ Rectangle {
                         }
 
                         QGCCheckBox {
-                            checked:        _enabled ? _enabled.rawValue : false
+                            id:             enabledCheckbox
+                            checked:        QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                             onClicked: {
-                                if (_enabled) {
-                                    _enabled.rawValue = checked
-                                }
+                                QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue = checked
+                                console.log("Баллистический калькулятор " + (checked ? "включен" : "выключен"))
+                                console.log("Значение настройки: " + QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue)
                             }
                         }
                     }
@@ -159,14 +180,14 @@ Rectangle {
                 // Параметры ветра
                 QGCLabel {
                     text:       qsTr("Параметры ветра")
-                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:    _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: windParamsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  windParamsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:                _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -205,14 +226,14 @@ Rectangle {
                 // Параметры груза
                 QGCLabel {
                     text:       qsTr("Параметры груза")
-                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:    _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: payloadParamsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  payloadParamsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:                _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -251,14 +272,14 @@ Rectangle {
                 // Коэффициенты сопротивления
                 QGCLabel {
                     text:       qsTr("Коэффициенты сопротивления")
-                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:    _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: dragCoefficientsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  dragCoefficientsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:                _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -297,14 +318,14 @@ Rectangle {
                 // Площади сечения
                 QGCLabel {
                     text:       qsTr("Площади сечения")
-                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:    _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: crossSectionalGrid.height + (_margins * 2)
                     Layout.preferredWidth:  crossSectionalGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:                _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -343,14 +364,14 @@ Rectangle {
                 // Параметры высоты
                 QGCLabel {
                     text:       qsTr("Параметры высоты")
-                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:    _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: heightParamsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  heightParamsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:                _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -429,14 +450,14 @@ Rectangle {
                 // Параметры отображения
                 QGCLabel {
                     text:       qsTr("Параметры отображения")
-                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:    _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: displayOptionsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  displayOptionsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:                _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -466,14 +487,14 @@ Rectangle {
                 // Калибровка OSD
                 QGCLabel {
                     text:       qsTr("Калибровка OSD")
-                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:    _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: calibrationGrid.height + (_margins * 2)
                     Layout.preferredWidth:  calibrationGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
+                    visible:                _settingsAvailable && QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
