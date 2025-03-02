@@ -85,13 +85,6 @@ void BallisticCalculator::calculateTrajectory()
         return;
     }
 
-    // Получаем текущие параметры
-    double mass = _ballisticSettings->payloadMassFact()->rawValue().toDouble() / 1000.0; // конвертируем граммы в кг
-    double vertDragCoef = _ballisticSettings->verticalDragCoefficientFact()->rawValue().toDouble();
-    double horizDragCoef = _ballisticSettings->horizontalDragCoefficientFact()->rawValue().toDouble();
-    double vertCrossSection = _ballisticSettings->verticalCrossSectionFact()->rawValue().toDouble() / 10000.0; // конвертируем см² в м²
-    double horizCrossSection = _ballisticSettings->horizontalCrossSectionFact()->rawValue().toDouble() / 10000.0;
-
     // Получаем текущие параметры полета
     double altitude = _vehicle->altitudeRelative()->rawValue().toDouble();
 
@@ -339,9 +332,4 @@ void BallisticCalculator::setVehicle(Vehicle* vehicle)
 
     // Обновляем траекторию с новым транспортным средством
     _updateTrajectory();
-}
-
-QGeoCoordinate BallisticCalculator::targetPoint() const
-{
-    return _targetPoint;
 } 
