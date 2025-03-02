@@ -10,7 +10,7 @@
 // Первый параметр должен быть "BallisticCalculator", чтобы получилось "BallisticCalculatorSettings"
 DECLARE_SETTINGGROUP(BallisticCalculator, "BallisticCalculator")
 {
-    qmlRegisterUncreatableType<BallisticCalculatorSettings>("QGroundControl.SettingsManager", 1, 0, "BallisticCalculatorSettings", "Reference only"); \
+    qmlRegisterUncreatableType<BallisticCalculatorSettings>("QGroundControl.SettingsManager", 1, 0, "BallisticCalculatorSettings", "Reference only");
 }
 
 // Используем стандартный макрос для всех настроек

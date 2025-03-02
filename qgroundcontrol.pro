@@ -696,6 +696,7 @@ HEADERS += \
     src/Settings/UnitsSettings.h \
     src/Settings/VideoSettings.h \
     src/Settings/GimbalControllerSettings.h \
+    src/Settings/BallisticCalculatorSettings.h \
     src/ShapeFileHelper.h \
     src/SHPFileHelper.h \
     src/Terrain/TerrainQuery.h \
