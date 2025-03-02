@@ -26,35 +26,35 @@ BallisticCalculator::BallisticCalculator(Vehicle* vehicle, QObject* parent)
     // Безопасное подключение сигналов от настроек
     if (_ballisticSettings) {
         // Проверяем каждый метод перед подключением
-        if (_ballisticSettings->WindSpeed()) {
+        if (_ballisticSettings->WindSpeed() != nullptr) {
             connect(_ballisticSettings->WindSpeed(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->WindDirection()) {
+        if (_ballisticSettings->WindDirection() != nullptr) {
             connect(_ballisticSettings->WindDirection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->PayloadMass()) {
+        if (_ballisticSettings->PayloadMass() != nullptr) {
             connect(_ballisticSettings->PayloadMass(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->VerticalDragCoefficient()) {
+        if (_ballisticSettings->VerticalDragCoefficient() != nullptr) {
             connect(_ballisticSettings->VerticalDragCoefficient(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->HorizontalDragCoefficient()) {
+        if (_ballisticSettings->HorizontalDragCoefficient() != nullptr) {
             connect(_ballisticSettings->HorizontalDragCoefficient(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->VerticalCrossSection()) {
+        if (_ballisticSettings->VerticalCrossSection() != nullptr) {
             connect(_ballisticSettings->VerticalCrossSection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->HorizontalCrossSection()) {
+        if (_ballisticSettings->HorizontalCrossSection() != nullptr) {
             connect(_ballisticSettings->HorizontalCrossSection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->GimbalPitch()) {
+        if (_ballisticSettings->GimbalPitch() != nullptr) {
             connect(_ballisticSettings->GimbalPitch(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
         
         // Связываем настройку Enabled с активацией калькулятора
-        if (_ballisticSettings->Enabled()) {
+        if (_ballisticSettings->Enabled() != nullptr) {
             connect(_ballisticSettings->Enabled(), &Fact::rawValueChanged, this, [this]() {
-                if (_ballisticSettings && _ballisticSettings->Enabled()) {
+                if (_ballisticSettings && _ballisticSettings->Enabled() != nullptr) {
                     this->setIsActive(_ballisticSettings->Enabled()->rawValue().toBool());
                 }
             });
@@ -77,35 +77,35 @@ BallisticCalculator::BallisticCalculator(QObject* parent)
     // Безопасное подключение сигналов от настроек
     if (_ballisticSettings) {
         // Проверяем каждый метод перед подключением
-        if (_ballisticSettings->WindSpeed()) {
+        if (_ballisticSettings->WindSpeed() != nullptr) {
             connect(_ballisticSettings->WindSpeed(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->WindDirection()) {
+        if (_ballisticSettings->WindDirection() != nullptr) {
             connect(_ballisticSettings->WindDirection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->PayloadMass()) {
+        if (_ballisticSettings->PayloadMass() != nullptr) {
             connect(_ballisticSettings->PayloadMass(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->VerticalDragCoefficient()) {
+        if (_ballisticSettings->VerticalDragCoefficient() != nullptr) {
             connect(_ballisticSettings->VerticalDragCoefficient(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->HorizontalDragCoefficient()) {
+        if (_ballisticSettings->HorizontalDragCoefficient() != nullptr) {
             connect(_ballisticSettings->HorizontalDragCoefficient(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->VerticalCrossSection()) {
+        if (_ballisticSettings->VerticalCrossSection() != nullptr) {
             connect(_ballisticSettings->VerticalCrossSection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->HorizontalCrossSection()) {
+        if (_ballisticSettings->HorizontalCrossSection() != nullptr) {
             connect(_ballisticSettings->HorizontalCrossSection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
-        if (_ballisticSettings->GimbalPitch()) {
+        if (_ballisticSettings->GimbalPitch() != nullptr) {
             connect(_ballisticSettings->GimbalPitch(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         }
         
         // Связываем настройку Enabled с активацией калькулятора
-        if (_ballisticSettings->Enabled()) {
+        if (_ballisticSettings->Enabled() != nullptr) {
             connect(_ballisticSettings->Enabled(), &Fact::rawValueChanged, this, [this]() {
-                if (_ballisticSettings && _ballisticSettings->Enabled()) {
+                if (_ballisticSettings && _ballisticSettings->Enabled() != nullptr) {
                     this->setIsActive(_ballisticSettings->Enabled()->rawValue().toBool());
                 }
             });
