@@ -29,28 +29,55 @@ Rectangle {
     anchors.fill:       parent
     anchors.margins:    ScreenTools.defaultFontPixelWidth
 
-    property var    _ballisticCalculatorSettings:  QGroundControl.settingsManager.ballisticCalculatorSettings
-    property Fact   _enabled:                      _ballisticCalculatorSettings.enabled
-    property Fact   _payloadMass:                  _ballisticCalculatorSettings.payloadMass
-    property Fact   _verticalDragCoefficient:      _ballisticCalculatorSettings.verticalDragCoefficient
-    property Fact   _horizontalDragCoefficient:    _ballisticCalculatorSettings.horizontalDragCoefficient
-    property Fact   _verticalCrossSection:         _ballisticCalculatorSettings.verticalCrossSection
-    property Fact   _horizontalCrossSection:       _ballisticCalculatorSettings.horizontalCrossSection
-    property Fact   _windSpeed:                    _ballisticCalculatorSettings.windSpeed
-    property Fact   _windDirection:                _ballisticCalculatorSettings.windDirection
-    property Fact   _heightMode:                   _ballisticCalculatorSettings.heightMode
-    property Fact   _fixedHeight:                  _ballisticCalculatorSettings.fixedHeight
-    property Fact   _auxChannel:                   _ballisticCalculatorSettings.auxChannel
-    property Fact   _auxMinHeight:                 _ballisticCalculatorSettings.auxMinHeight
-    property Fact   _auxMaxHeight:                 _ballisticCalculatorSettings.auxMaxHeight
-    property Fact   _cameraOffset:                 _ballisticCalculatorSettings.cameraOffset
-    property Fact   _showTrajectory:               _ballisticCalculatorSettings.showTrajectory
-    property Fact   _calibrationMode:              _ballisticCalculatorSettings.calibrationMode
-    property Fact   _calibrationStep:              _ballisticCalculatorSettings.calibrationStep
-    property Fact   _markerSize:                   _ballisticCalculatorSettings.markerSize
-    property Fact   _markerOffsetX:                _ballisticCalculatorSettings.markerOffsetX
-    property Fact   _markerOffsetY:                _ballisticCalculatorSettings.markerOffsetY
-    property Fact   _gimbalPitch:                  _ballisticCalculatorSettings.gimbalPitch
+    // Проверяем наличие настроек баллистического калькулятора
+    property bool   _settingsAvailable:         QGroundControl.settingsManager && 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings
+    property var    _ballisticCalculatorSettings: _settingsAvailable ? 
+                                               QGroundControl.settingsManager.ballisticCalculatorSettings : null
+    
+    // Безопасное получение Fact объектов с проверкой на null и использованием правильных имен свойств
+    property Fact   _enabled:                  _settingsAvailable && _ballisticCalculatorSettings.Enabled ? 
+                                               _ballisticCalculatorSettings.Enabled : null
+    property Fact   _payloadMass:              _settingsAvailable && _ballisticCalculatorSettings.PayloadMass ? 
+                                               _ballisticCalculatorSettings.PayloadMass : null
+    property Fact   _verticalDragCoefficient:  _settingsAvailable && _ballisticCalculatorSettings.VerticalDragCoefficient ? 
+                                               _ballisticCalculatorSettings.VerticalDragCoefficient : null
+    property Fact   _horizontalDragCoefficient: _settingsAvailable && _ballisticCalculatorSettings.HorizontalDragCoefficient ? 
+                                               _ballisticCalculatorSettings.HorizontalDragCoefficient : null
+    property Fact   _verticalCrossSection:     _settingsAvailable && _ballisticCalculatorSettings.VerticalCrossSection ? 
+                                               _ballisticCalculatorSettings.VerticalCrossSection : null
+    property Fact   _horizontalCrossSection:   _settingsAvailable && _ballisticCalculatorSettings.HorizontalCrossSection ? 
+                                               _ballisticCalculatorSettings.HorizontalCrossSection : null
+    property Fact   _windSpeed:                _settingsAvailable && _ballisticCalculatorSettings.WindSpeed ? 
+                                               _ballisticCalculatorSettings.WindSpeed : null
+    property Fact   _windDirection:            _settingsAvailable && _ballisticCalculatorSettings.WindDirection ? 
+                                               _ballisticCalculatorSettings.WindDirection : null
+    // Используем DropHeight вместо HeightMode, так как HeightMode не объявлен в BallisticCalculatorSettings.cc
+    property int    _heightMode:               0  // Значение по умолчанию - фиксированная высота
+    property Fact   _fixedHeight:              _settingsAvailable && _ballisticCalculatorSettings.DropHeight ? 
+                                               _ballisticCalculatorSettings.DropHeight : null
+    property Fact   _auxChannel:               _settingsAvailable && _ballisticCalculatorSettings.AuxChannel ? 
+                                               _ballisticCalculatorSettings.AuxChannel : null
+    property Fact   _auxMinHeight:             _settingsAvailable && _ballisticCalculatorSettings.AuxMinHeight ? 
+                                               _ballisticCalculatorSettings.AuxMinHeight : null
+    property Fact   _auxMaxHeight:             _settingsAvailable && _ballisticCalculatorSettings.AuxMaxHeight ? 
+                                               _ballisticCalculatorSettings.AuxMaxHeight : null
+    property Fact   _cameraOffset:             _settingsAvailable && _ballisticCalculatorSettings.CameraOffset ? 
+                                               _ballisticCalculatorSettings.CameraOffset : null
+    property Fact   _showTrajectory:           _settingsAvailable && _ballisticCalculatorSettings.ShowTrajectory ? 
+                                               _ballisticCalculatorSettings.ShowTrajectory : null
+    property Fact   _calibrationMode:          _settingsAvailable && _ballisticCalculatorSettings.CalibrationMode ? 
+                                               _ballisticCalculatorSettings.CalibrationMode : null
+    property Fact   _calibrationStep:          _settingsAvailable && _ballisticCalculatorSettings.CalibrationStep ? 
+                                               _ballisticCalculatorSettings.CalibrationStep : null
+    property Fact   _markerSize:               _settingsAvailable && _ballisticCalculatorSettings.MarkerSize ? 
+                                               _ballisticCalculatorSettings.MarkerSize : null
+    property Fact   _markerOffsetX:            _settingsAvailable && _ballisticCalculatorSettings.MarkerOffsetX ? 
+                                               _ballisticCalculatorSettings.MarkerOffsetX : null
+    property Fact   _markerOffsetY:            _settingsAvailable && _ballisticCalculatorSettings.MarkerOffsetY ? 
+                                               _ballisticCalculatorSettings.MarkerOffsetY : null
+    property Fact   _gimbalPitch:              _settingsAvailable && _ballisticCalculatorSettings.GimbalPitch ? 
+                                               _ballisticCalculatorSettings.GimbalPitch : null
 
     property real   _labelWidth:                   ScreenTools.defaultFontPixelWidth * 20
     property real   _valueFieldWidth:              ScreenTools.defaultFontPixelWidth * 20
@@ -58,7 +85,17 @@ Rectangle {
 
     readonly property real _internalWidthRatio:    0.8
 
+    // Константы для режимов высоты (из BallisticCalculatorSettings.h)
+    readonly property int HeightModeFixed: 0
+    readonly property int HeightModeBarometric: 1
+    readonly property int HeightModeRemote: 2
+
     QGCPalette { id: qgcPal; colorGroupEnabled: enabled }
+
+    // Функция для безопасного получения значения
+    function safeRawValue(fact, defaultValue) {
+        return fact ? fact.rawValue : defaultValue;
+    }
 
     QGCFlickable {
         clip:               true
@@ -82,11 +119,19 @@ Rectangle {
                     font.family: ScreenTools.demiboldFontFamily
                 }
 
+                // Сообщение об ошибке, если настройки недоступны
+                QGCLabel {
+                    text:       qsTr("Ошибка: Настройки баллистического калькулятора недоступны")
+                    color:      "red"
+                    visible:    !_settingsAvailable
+                }
+
                 Rectangle {
                     Layout.preferredHeight: enabledRow.height + (_margins * 2)
                     Layout.preferredWidth:  enabledRow.width + (_margins * 2)
                     color:                  qgcPal.windowShade
                     Layout.fillWidth:       true
+                    visible:                _settingsAvailable
 
                     RowLayout {
                         id:                         enabledRow
@@ -101,9 +146,11 @@ Rectangle {
                         }
 
                         QGCCheckBox {
-                            checked:        _enabled.rawValue
+                            checked:        _enabled ? _enabled.rawValue : false
                             onClicked: {
-                                _enabled.rawValue = checked
+                                if (_enabled) {
+                                    _enabled.rawValue = checked
+                                }
                             }
                         }
                     }
@@ -112,14 +159,14 @@ Rectangle {
                 // Параметры ветра
                 QGCLabel {
                     text:       qsTr("Параметры ветра")
-                    visible:    _enabled.rawValue
+                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: windParamsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  windParamsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.rawValue
+                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -139,6 +186,7 @@ Rectangle {
                             fact:           _windSpeed
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите скорость ветра")
+                            visible:        _windSpeed !== null
                         }
 
                         QGCLabel {
@@ -149,6 +197,7 @@ Rectangle {
                             fact:           _windDirection
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите направление ветра (0-360)")
+                            visible:        _windDirection !== null
                         }
                     }
                 }
@@ -156,14 +205,14 @@ Rectangle {
                 // Параметры груза
                 QGCLabel {
                     text:       qsTr("Параметры груза")
-                    visible:    _enabled.rawValue
+                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: payloadParamsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  payloadParamsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.rawValue
+                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -183,6 +232,7 @@ Rectangle {
                             fact:           _payloadMass
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите массу груза")
+                            visible:        _payloadMass !== null
                         }
 
                         QGCLabel {
@@ -193,6 +243,7 @@ Rectangle {
                             fact:           _cameraOffset
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите смещение от камеры")
+                            visible:        _cameraOffset !== null
                         }
                     }
                 }
@@ -200,14 +251,14 @@ Rectangle {
                 // Коэффициенты сопротивления
                 QGCLabel {
                     text:       qsTr("Коэффициенты сопротивления")
-                    visible:    _enabled.rawValue
+                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: dragCoefficientsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  dragCoefficientsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.rawValue
+                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -227,6 +278,7 @@ Rectangle {
                             fact:           _verticalDragCoefficient
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите вертикальный коэффициент")
+                            visible:        _verticalDragCoefficient !== null
                         }
 
                         QGCLabel {
@@ -237,6 +289,7 @@ Rectangle {
                             fact:           _horizontalDragCoefficient
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите горизонтальный коэффициент")
+                            visible:        _horizontalDragCoefficient !== null
                         }
                     }
                 }
@@ -244,14 +297,14 @@ Rectangle {
                 // Площади сечения
                 QGCLabel {
                     text:       qsTr("Площади сечения")
-                    visible:    _enabled.rawValue
+                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: crossSectionalGrid.height + (_margins * 2)
                     Layout.preferredWidth:  crossSectionalGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.rawValue
+                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -271,6 +324,7 @@ Rectangle {
                             fact:           _verticalCrossSection
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите вертикальную площадь")
+                            visible:        _verticalCrossSection !== null
                         }
 
                         QGCLabel {
@@ -281,6 +335,7 @@ Rectangle {
                             fact:           _horizontalCrossSection
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите горизонтальную площадь")
+                            visible:        _horizontalCrossSection !== null
                         }
                     }
                 }
@@ -288,14 +343,14 @@ Rectangle {
                 // Параметры высоты
                 QGCLabel {
                     text:       qsTr("Параметры высоты")
-                    visible:    _enabled.rawValue
+                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: heightParamsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  heightParamsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.rawValue
+                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -314,57 +369,57 @@ Rectangle {
                         QGCComboBox {
                             id:             heightModeCombo
                             model:          [qsTr("Фиксированная высота"), qsTr("Высота от барометра"), qsTr("Высота от AUX канала")]
-                            currentIndex:   _heightMode.rawValue
+                            currentIndex:   _heightMode
                             onActivated: {
-                                _heightMode.rawValue = index
+                                _heightMode = index
                             }
                             width:          _valueFieldWidth
                         }
 
                         QGCLabel {
                             text:           qsTr("Фиксированная высота (м)")
-                            visible:        _heightMode.rawValue === 0
+                            visible:        _heightMode === HeightModeFixed
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _fixedHeight
-                            visible:        _heightMode.rawValue === 0
+                            visible:        _heightMode === HeightModeFixed && _fixedHeight !== null
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите фиксированную высоту")
                         }
 
                         QGCLabel {
                             text:           qsTr("Номер AUX канала")
-                            visible:        _heightMode.rawValue === 2
+                            visible:        _heightMode === HeightModeRemote
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _auxChannel
-                            visible:        _heightMode.rawValue === 2
+                            visible:        _heightMode === HeightModeRemote && _auxChannel !== null
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите номер канала")
                         }
 
                         QGCLabel {
                             text:           qsTr("Минимальная высота AUX (м)")
-                            visible:        _heightMode.rawValue === 2
+                            visible:        _heightMode === HeightModeRemote
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _auxMinHeight
-                            visible:        _heightMode.rawValue === 2
+                            visible:        _heightMode === HeightModeRemote && _auxMinHeight !== null
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите минимальную высоту")
                         }
 
                         QGCLabel {
                             text:           qsTr("Максимальная высота AUX (м)")
-                            visible:        _heightMode.rawValue === 2
+                            visible:        _heightMode === HeightModeRemote
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _auxMaxHeight
-                            visible:        _heightMode.rawValue === 2
+                            visible:        _heightMode === HeightModeRemote && _auxMaxHeight !== null
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите максимальную высоту")
                         }
@@ -374,14 +429,14 @@ Rectangle {
                 // Параметры отображения
                 QGCLabel {
                     text:       qsTr("Параметры отображения")
-                    visible:    _enabled.rawValue
+                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: displayOptionsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  displayOptionsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.rawValue
+                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -398,9 +453,11 @@ Rectangle {
                             Layout.fillWidth: true
                         }
                         QGCCheckBox {
-                            checked:        _showTrajectory.rawValue
+                            checked:        _showTrajectory ? _showTrajectory.rawValue : false
                             onClicked: {
-                                _showTrajectory.rawValue = checked
+                                if (_showTrajectory) {
+                                    _showTrajectory.rawValue = checked
+                                }
                             }
                         }
                     }
@@ -409,14 +466,14 @@ Rectangle {
                 // Калибровка OSD
                 QGCLabel {
                     text:       qsTr("Калибровка OSD")
-                    visible:    _enabled.rawValue
+                    visible:    _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: calibrationGrid.height + (_margins * 2)
                     Layout.preferredWidth:  calibrationGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.rawValue
+                    visible:                _settingsAvailable && _enabled && safeRawValue(_enabled, false)
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -434,9 +491,11 @@ Rectangle {
                         }
                         QGCCheckBox {
                             id:             calibrationModeCheckbox
-                            checked:        _calibrationMode.rawValue
+                            checked:        _calibrationMode ? _calibrationMode.rawValue : false
                             onClicked: {
-                                _calibrationMode.rawValue = checked
+                                if (_calibrationMode) {
+                                    _calibrationMode.rawValue = checked
+                                }
                             }
                         }
 
@@ -447,7 +506,7 @@ Rectangle {
                         }
                         FactTextField {
                             fact:           _calibrationStep
-                            visible:        calibrationModeCheckbox.checked
+                            visible:        calibrationModeCheckbox.checked && _calibrationStep !== null
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите шаг калибровки")
                         }
@@ -460,6 +519,7 @@ Rectangle {
                             fact:           _markerSize
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите размер маркера")
+                            visible:        _markerSize !== null
                         }
 
                         QGCLabel {
@@ -470,6 +530,7 @@ Rectangle {
                             fact:           _markerOffsetX
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите смещение по X")
+                            visible:        _markerOffsetX !== null
                         }
 
                         QGCLabel {
@@ -480,6 +541,7 @@ Rectangle {
                             fact:           _markerOffsetY
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите смещение по Y")
+                            visible:        _markerOffsetY !== null
                         }
 
                         QGCLabel {
@@ -490,17 +552,20 @@ Rectangle {
                             fact:           _gimbalPitch
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите наклон подвеса")
+                            visible:        _gimbalPitch !== null
                         }
 
                         QGCButton {
                             text:           qsTr("Сброс калибровки")
                             Layout.columnSpan: 2
                             Layout.fillWidth: true
+                            visible:        _markerSize !== null && _markerOffsetX !== null && 
+                                           _markerOffsetY !== null && _gimbalPitch !== null
                             onClicked: {
-                                _markerSize.rawValue = 32
-                                _markerOffsetX.rawValue = 0
-                                _markerOffsetY.rawValue = 0
-                                _gimbalPitch.rawValue = 0
+                                if (_markerSize) _markerSize.rawValue = 32
+                                if (_markerOffsetX) _markerOffsetX.rawValue = 0
+                                if (_markerOffsetY) _markerOffsetY.rawValue = 0
+                                if (_gimbalPitch) _gimbalPitch.rawValue = 0
                             }
                         }
                     }
