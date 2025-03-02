@@ -1,5 +1,6 @@
 add_custom_target(UiPreferencesQml
 	SOURCES
+		BallisticCalculatorSettings.qml
 		BluetoothSettings.qml
 		DebugWindow.qml
 		GeneralSettings.qml
