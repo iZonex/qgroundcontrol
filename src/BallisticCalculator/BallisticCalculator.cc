@@ -12,7 +12,12 @@ BallisticCalculator::BallisticCalculator(Vehicle* vehicle, QObject* parent)
     , _dropTime(0.0)
     , _isActive(false)
 {
-    _ballisticSettings = qgcApp()->toolbox()->settingsManager()->ballisticCalculatorSettings();
+    // Добавляем проверки на nullptr для каждого вызова в цепочке
+    if (qgcApp() && qgcApp()->toolbox() && qgcApp()->toolbox()->settingsManager()) {
+        _ballisticSettings = qgcApp()->toolbox()->settingsManager()->ballisticCalculatorSettings();
+    } else {
+        _ballisticSettings = nullptr;
+    }
     
     if (_vehicle) {
         connect(_vehicle, &Vehicle::rcChannelsChanged, this, &BallisticCalculator::_rcChannelsChanged);
@@ -85,7 +90,12 @@ BallisticCalculator::BallisticCalculator(QObject* parent)
     , _dropTime(0.0)
     , _isActive(false)
 {
-    _ballisticSettings = qgcApp()->toolbox()->settingsManager()->ballisticCalculatorSettings();
+    // Добавляем проверки на nullptr для каждого вызова в цепочке
+    if (qgcApp() && qgcApp()->toolbox() && qgcApp()->toolbox()->settingsManager()) {
+        _ballisticSettings = qgcApp()->toolbox()->settingsManager()->ballisticCalculatorSettings();
+    } else {
+        _ballisticSettings = nullptr;
+    }
     
     // Безопасное подключение сигналов от настроек
     if (_ballisticSettings) {
