@@ -54,7 +54,66 @@ Item {
         bottomEdgeRightInset:   parentToolInsets.bottomEdgeRightInset
     }
     
-    // Баллистический калькулятор
+    // Баллистический калькулятор - временное решение
+    Rectangle {
+        id: ballisticTargetIndicator
+        anchors.fill: parent
+        color: "transparent"
+        visible: QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
+        
+        // Прицельная метка
+        Rectangle {
+            id: crosshair
+            width: 32
+            height: width
+            color: "transparent"
+            border.color: "red"
+            border.width: 2
+            radius: width / 2
+            anchors.centerIn: parent
+            
+            // Вертикальная линия
+            Rectangle {
+                width: 2
+                height: parent.height * 0.6
+                color: "red"
+                anchors.centerIn: parent
+            }
+            
+            // Горизонтальная линия
+            Rectangle {
+                width: parent.width * 0.6
+                height: 2
+                color: "red"
+                anchors.centerIn: parent
+            }
+        }
+        
+        // Информация о точке падения
+        Column {
+            anchors {
+                left: crosshair.right
+                leftMargin: 10
+                verticalCenter: crosshair.verticalCenter
+            }
+            spacing: 5
+            
+            Text {
+                text: "Баллистический калькулятор"
+                color: "white"
+                font.pixelSize: 14
+            }
+            
+            Text {
+                text: "Активен"
+                color: "green"
+                font.pixelSize: 14
+            }
+        }
+    }
+    
+    // Оригинальный код, закомментирован
+    /*
     BallisticTargetIndicator {
         anchors.fill: parent
         visible: QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
@@ -62,4 +121,5 @@ Item {
         dropTime: QGroundControl.ballisticCalculator.dropTime
         isActive: QGroundControl.ballisticCalculator.isActive
     }
+    */
 }

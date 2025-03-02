@@ -557,7 +557,8 @@ void QGCApplication::_initCommon()
     qmlRegisterSingletonInstance<BallisticCalculator>("QGroundControl.BallisticCalculator", 1, 0, "BallisticCalculator", _toolbox->ballisticCalculator());
 
     // Регистрируем QML-компоненты для баллистического калькулятора
-    qmlRegisterType(QUrl("qrc:/QGroundControl/FlightDisplay/BallisticTargetIndicator.qml"), "QGroundControl.FlightDisplay", 1, 0, "BallisticTargetIndicator");
+    // Не используем URL, так как это может вызывать проблемы с поиском файла
+    // qmlRegisterType(QUrl("qrc:/QGroundControl/FlightDisplay/BallisticTargetIndicator.qml"), "QGroundControl.FlightDisplay", 1, 0, "BallisticTargetIndicator");
 }
 
 bool QGCApplication::_initForNormalAppBoot()
