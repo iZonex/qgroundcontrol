@@ -52,7 +52,9 @@ QGCToolbox::QGCToolbox(QGCApplication* app)
     , _audioOutput(nullptr)
     , _factSystem(nullptr)
     , _firmwarePluginManager(nullptr)
-    , _followMe(nullptr)
+#ifndef __mobile__
+    , _gpsManager(nullptr)
+#endif
     , _imageProvider(nullptr)
     , _joystickManager(nullptr)
     , _linkManager(nullptr)
@@ -61,10 +63,22 @@ QGCToolbox::QGCToolbox(QGCApplication* app)
     , _multiVehicleManager(nullptr)
     , _mapEngineManager(nullptr)
     , _uasMessageHandler(nullptr)
+    , _followMe(nullptr)
     , _qgcPositionManager(nullptr)
     , _videoManager(nullptr)
     , _mavlinkLogManager(nullptr)
+    , _corePlugin(nullptr)
+    , _settingsManager(nullptr)
     , _adsbVehicleManager(nullptr)
+#if defined(QGC_ENABLE_PAIRING)
+    , _pairingManager(nullptr)
+#endif
+#if defined(QGC_GST_TAISYNC_ENABLED)
+    , _taisyncManager(nullptr)
+#endif
+#if defined(QGC_GST_MICROHARD_ENABLED)
+    , _microhardManager(nullptr)
+#endif
     , _ballisticCalculator(nullptr)
 {
     // SettingsManager must be first so settings are available to any subsequent tools
@@ -85,8 +99,8 @@ QGCToolbox::QGCToolbox(QGCApplication* app)
     _multiVehicleManager    = new MultiVehicleManager       (app, this);
     _mapEngineManager       = new QGCMapEngineManager       (app, this);
     _uasMessageHandler      = new UASMessageHandler         (app, this);
-    _qgcPositionManager     = new QGCPositionManager        (app, this);
     _followMe               = new FollowMe                  (app, this);
+    _qgcPositionManager     = new QGCPositionManager        (app, this);
     _videoManager           = new VideoManager              (app, this);
     _mavlinkLogManager      = new MAVLinkLogManager         (app, this);
     _adsbVehicleManager     = new ADSBVehicleManager        (app, this);
