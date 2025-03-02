@@ -57,7 +57,7 @@ Item {
     // Баллистический калькулятор
     BallisticTargetIndicator {
         anchors.fill: parent
-        visible: QGroundControl.settingsManager.ballisticCalculatorSettings.enabled.rawValue
+        visible: QGroundControl.settingsManager.ballisticCalculatorSettings.Enabled.rawValue
         targetPoint: QGroundControl.ballisticCalculator.targetPoint
         dropTime: QGroundControl.ballisticCalculator.dropTime
         isActive: QGroundControl.ballisticCalculator.isActive

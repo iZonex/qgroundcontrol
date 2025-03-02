@@ -14,6 +14,7 @@ DECLARE_SETTINGGROUP(BallisticCalculator, "BallisticCalculator")
 }
 
 // Используем стандартный макрос для всех настроек
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, Enabled)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, PayloadMass)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, VerticalDragCoefficient)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, HorizontalDragCoefficient)
@@ -40,6 +41,8 @@ DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindAltitude)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropAltitude)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropSpeed)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropDirection)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, CalibrationMode)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, CalibrationStep)
 
 void BallisticCalculatorSettings::saveCurrentProfile(const QString& name)
 {

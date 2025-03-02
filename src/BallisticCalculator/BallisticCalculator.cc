@@ -30,6 +30,14 @@ BallisticCalculator::BallisticCalculator(Vehicle* vehicle, QObject* parent)
         connect(_ballisticSettings->VerticalCrossSection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         connect(_ballisticSettings->HorizontalCrossSection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         connect(_ballisticSettings->GimbalPitch(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        
+        // Связываем настройку Enabled с активацией калькулятора
+        connect(_ballisticSettings->Enabled(), &Fact::rawValueChanged, this, [this]() {
+            this->setIsActive(_ballisticSettings->Enabled()->rawValue().toBool());
+        });
+        
+        // Устанавливаем начальное состояние активности
+        setIsActive(_ballisticSettings->Enabled()->rawValue().toBool());
     }
 }
 
@@ -47,6 +55,14 @@ BallisticCalculator::BallisticCalculator(QObject* parent)
         connect(_ballisticSettings->VerticalDragCoefficient(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         connect(_ballisticSettings->HorizontalDragCoefficient(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
         connect(_ballisticSettings->VerticalCrossSection(), &Fact::rawValueChanged, this, &BallisticCalculator::_updateTrajectory);
+        
+        // Связываем настройку Enabled с активацией калькулятора
+        connect(_ballisticSettings->Enabled(), &Fact::rawValueChanged, this, [this]() {
+            this->setIsActive(_ballisticSettings->Enabled()->rawValue().toBool());
+        });
+        
+        // Устанавливаем начальное состояние активности
+        setIsActive(_ballisticSettings->Enabled()->rawValue().toBool());
     }
 }
 
