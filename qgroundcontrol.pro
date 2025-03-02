@@ -1453,3 +1453,13 @@ LinuxBuild {
 
     INSTALLS += target share_qgroundcontrol share_icons share_metainfo share_applications
 }
+
+# Баллистический калькулятор
+HEADERS += \
+    src/BallisticCalculator/BallisticCalculator.h
+
+SOURCES += \
+    src/BallisticCalculator/BallisticCalculator.cc
+
+INCLUDEPATH += \
+    src/BallisticCalculator
