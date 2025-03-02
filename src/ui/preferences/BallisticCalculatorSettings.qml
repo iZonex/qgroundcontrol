@@ -36,48 +36,48 @@ Rectangle {
                                                QGroundControl.settingsManager.ballisticCalculatorSettings : null
     
     // Безопасное получение Fact объектов с проверкой на null и использованием правильных имен свойств
-    property Fact   _enabled:                  _settingsAvailable && _ballisticCalculatorSettings.Enabled ? 
-                                               _ballisticCalculatorSettings.Enabled : null
-    property Fact   _payloadMass:              _settingsAvailable && _ballisticCalculatorSettings.PayloadMass ? 
-                                               _ballisticCalculatorSettings.PayloadMass : null
-    property Fact   _verticalDragCoefficient:  _settingsAvailable && _ballisticCalculatorSettings.VerticalDragCoefficient ? 
-                                               _ballisticCalculatorSettings.VerticalDragCoefficient : null
-    property Fact   _horizontalDragCoefficient: _settingsAvailable && _ballisticCalculatorSettings.HorizontalDragCoefficient ? 
-                                               _ballisticCalculatorSettings.HorizontalDragCoefficient : null
-    property Fact   _verticalCrossSection:     _settingsAvailable && _ballisticCalculatorSettings.VerticalCrossSection ? 
-                                               _ballisticCalculatorSettings.VerticalCrossSection : null
-    property Fact   _horizontalCrossSection:   _settingsAvailable && _ballisticCalculatorSettings.HorizontalCrossSection ? 
-                                               _ballisticCalculatorSettings.HorizontalCrossSection : null
-    property Fact   _windSpeed:                _settingsAvailable && _ballisticCalculatorSettings.WindSpeed ? 
-                                               _ballisticCalculatorSettings.WindSpeed : null
-    property Fact   _windDirection:            _settingsAvailable && _ballisticCalculatorSettings.WindDirection ? 
-                                               _ballisticCalculatorSettings.WindDirection : null
+    property Fact   _enabled:                  _settingsAvailable && _ballisticCalculatorSettings.enabled ? 
+                                               _ballisticCalculatorSettings.enabled : null
+    property Fact   _payloadMass:              _settingsAvailable && _ballisticCalculatorSettings.payloadMass ? 
+                                               _ballisticCalculatorSettings.payloadMass : null
+    property Fact   _verticalDragCoefficient:  _settingsAvailable && _ballisticCalculatorSettings.verticalDragCoefficient ? 
+                                               _ballisticCalculatorSettings.verticalDragCoefficient : null
+    property Fact   _horizontalDragCoefficient: _settingsAvailable && _ballisticCalculatorSettings.horizontalDragCoefficient ? 
+                                               _ballisticCalculatorSettings.horizontalDragCoefficient : null
+    property Fact   _verticalCrossSection:     _settingsAvailable && _ballisticCalculatorSettings.verticalCrossSection ? 
+                                               _ballisticCalculatorSettings.verticalCrossSection : null
+    property Fact   _horizontalCrossSection:   _settingsAvailable && _ballisticCalculatorSettings.horizontalCrossSection ? 
+                                               _ballisticCalculatorSettings.horizontalCrossSection : null
+    property Fact   _windSpeed:                _settingsAvailable && _ballisticCalculatorSettings.windSpeed ? 
+                                               _ballisticCalculatorSettings.windSpeed : null
+    property Fact   _windDirection:            _settingsAvailable && _ballisticCalculatorSettings.windDirection ? 
+                                               _ballisticCalculatorSettings.windDirection : null
     // Используем DropHeight вместо HeightMode, так как HeightMode не объявлен в BallisticCalculatorSettings.cc
     property int    _heightMode:               0  // Значение по умолчанию - фиксированная высота
-    property Fact   _fixedHeight:              _settingsAvailable && _ballisticCalculatorSettings.DropHeight ? 
-                                               _ballisticCalculatorSettings.DropHeight : null
-    property Fact   _auxChannel:               _settingsAvailable && _ballisticCalculatorSettings.AuxChannel ? 
-                                               _ballisticCalculatorSettings.AuxChannel : null
-    property Fact   _auxMinHeight:             _settingsAvailable && _ballisticCalculatorSettings.AuxMinHeight ? 
-                                               _ballisticCalculatorSettings.AuxMinHeight : null
-    property Fact   _auxMaxHeight:             _settingsAvailable && _ballisticCalculatorSettings.AuxMaxHeight ? 
-                                               _ballisticCalculatorSettings.AuxMaxHeight : null
-    property Fact   _cameraOffset:             _settingsAvailable && _ballisticCalculatorSettings.CameraOffset ? 
-                                               _ballisticCalculatorSettings.CameraOffset : null
-    property Fact   _showTrajectory:           _settingsAvailable && _ballisticCalculatorSettings.ShowTrajectory ? 
-                                               _ballisticCalculatorSettings.ShowTrajectory : null
-    property Fact   _calibrationMode:          _settingsAvailable && _ballisticCalculatorSettings.CalibrationMode ? 
-                                               _ballisticCalculatorSettings.CalibrationMode : null
-    property Fact   _calibrationStep:          _settingsAvailable && _ballisticCalculatorSettings.CalibrationStep ? 
-                                               _ballisticCalculatorSettings.CalibrationStep : null
-    property Fact   _markerSize:               _settingsAvailable && _ballisticCalculatorSettings.MarkerSize ? 
-                                               _ballisticCalculatorSettings.MarkerSize : null
-    property Fact   _markerOffsetX:            _settingsAvailable && _ballisticCalculatorSettings.MarkerOffsetX ? 
-                                               _ballisticCalculatorSettings.MarkerOffsetX : null
-    property Fact   _markerOffsetY:            _settingsAvailable && _ballisticCalculatorSettings.MarkerOffsetY ? 
-                                               _ballisticCalculatorSettings.MarkerOffsetY : null
-    property Fact   _gimbalPitch:              _settingsAvailable && _ballisticCalculatorSettings.GimbalPitch ? 
-                                               _ballisticCalculatorSettings.GimbalPitch : null
+    property Fact   _fixedHeight:              _settingsAvailable && _ballisticCalculatorSettings.dropHeight ? 
+                                               _ballisticCalculatorSettings.dropHeight : null
+    property Fact   _auxChannel:               _settingsAvailable && _ballisticCalculatorSettings.auxChannel ? 
+                                               _ballisticCalculatorSettings.auxChannel : null
+    property Fact   _auxMinHeight:             _settingsAvailable && _ballisticCalculatorSettings.auxMinHeight ? 
+                                               _ballisticCalculatorSettings.auxMinHeight : null
+    property Fact   _auxMaxHeight:             _settingsAvailable && _ballisticCalculatorSettings.auxMaxHeight ? 
+                                               _ballisticCalculatorSettings.auxMaxHeight : null
+    property Fact   _cameraOffset:             _settingsAvailable && _ballisticCalculatorSettings.cameraOffset ? 
+                                               _ballisticCalculatorSettings.cameraOffset : null
+    property Fact   _showTrajectory:           _settingsAvailable && _ballisticCalculatorSettings.showTrajectory ? 
+                                               _ballisticCalculatorSettings.showTrajectory : null
+    property Fact   _calibrationMode:          _settingsAvailable && _ballisticCalculatorSettings.calibrationMode ? 
+                                               _ballisticCalculatorSettings.calibrationMode : null
+    property Fact   _calibrationStep:          _settingsAvailable && _ballisticCalculatorSettings.calibrationStep ? 
+                                               _ballisticCalculatorSettings.calibrationStep : null
+    property Fact   _markerSize:               _settingsAvailable && _ballisticCalculatorSettings.markerSize ? 
+                                               _ballisticCalculatorSettings.markerSize : null
+    property Fact   _markerOffsetX:            _settingsAvailable && _ballisticCalculatorSettings.markerOffsetX ? 
+                                               _ballisticCalculatorSettings.markerOffsetX : null
+    property Fact   _markerOffsetY:            _settingsAvailable && _ballisticCalculatorSettings.markerOffsetY ? 
+                                               _ballisticCalculatorSettings.markerOffsetY : null
+    property Fact   _gimbalPitch:              _settingsAvailable && _ballisticCalculatorSettings.gimbalPitch ? 
+                                               _ballisticCalculatorSettings.gimbalPitch : null
 
     property real   _labelWidth:                   ScreenTools.defaultFontPixelWidth * 20
     property real   _valueFieldWidth:              ScreenTools.defaultFontPixelWidth * 20
