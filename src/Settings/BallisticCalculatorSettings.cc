@@ -41,18 +41,12 @@ const char* BallisticCalculatorSettings::DropAltitudeName = "DropAltitude";
 const char* BallisticCalculatorSettings::DropSpeedName = "DropSpeed";
 const char* BallisticCalculatorSettings::DropDirectionName = "DropDirection";
 
-BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
-    : SettingsGroup(name, settingsGroup, parent)
-{
-    QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
-}
-
+// Деструктор
 BallisticCalculatorSettings::~BallisticCalculatorSettings()
 {
-    // Пустой деструктор, все очистится автоматически
 }
 
-// Используем макрос DECLARE_SETTINGSFACT для всех настроек
+// Используем макрос DECLARE_SETTINGSFACT только для методов, объявленных с DEFINE_SETTINGFACT
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterEnabled)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterPeriod)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxChannel)
@@ -61,10 +55,7 @@ DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMaxHeight)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropHeight)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, GimbalPitch)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ShowTrajectory)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindAltitude)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropAltitude)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropSpeed)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropDirection)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ActiveProfile)
 
 // Константные методы доступа к фактам
 Fact* BallisticCalculatorSettings::PayloadMass() const
@@ -163,20 +154,44 @@ Fact* BallisticCalculatorSettings::MaxDropWindSpeed() const
     return const_cast<BallisticCalculatorSettings*>(this)->_MaxDropWindSpeedFact;
 }
 
-Fact* BallisticCalculatorSettings::ActiveProfile() const
-{
-    if (!const_cast<BallisticCalculatorSettings*>(this)->_ActiveProfileFact) {
-        const_cast<BallisticCalculatorSettings*>(this)->_ActiveProfileFact = const_cast<BallisticCalculatorSettings*>(this)->_createSettingsFact(ActiveProfileName);
-    }
-    return const_cast<BallisticCalculatorSettings*>(this)->_ActiveProfileFact;
-}
-
 Fact* BallisticCalculatorSettings::SavedProfiles() const
 {
     if (!const_cast<BallisticCalculatorSettings*>(this)->_SavedProfilesFact) {
         const_cast<BallisticCalculatorSettings*>(this)->_SavedProfilesFact = const_cast<BallisticCalculatorSettings*>(this)->_createSettingsFact(SavedProfilesName);
     }
     return const_cast<BallisticCalculatorSettings*>(this)->_SavedProfilesFact;
+}
+
+Fact* BallisticCalculatorSettings::WindAltitude() const
+{
+    if (!const_cast<BallisticCalculatorSettings*>(this)->_WindAltitudeFact) {
+        const_cast<BallisticCalculatorSettings*>(this)->_WindAltitudeFact = const_cast<BallisticCalculatorSettings*>(this)->_createSettingsFact(WindAltitudeName);
+    }
+    return const_cast<BallisticCalculatorSettings*>(this)->_WindAltitudeFact;
+}
+
+Fact* BallisticCalculatorSettings::DropAltitude() const
+{
+    if (!const_cast<BallisticCalculatorSettings*>(this)->_DropAltitudeFact) {
+        const_cast<BallisticCalculatorSettings*>(this)->_DropAltitudeFact = const_cast<BallisticCalculatorSettings*>(this)->_createSettingsFact(DropAltitudeName);
+    }
+    return const_cast<BallisticCalculatorSettings*>(this)->_DropAltitudeFact;
+}
+
+Fact* BallisticCalculatorSettings::DropSpeed() const
+{
+    if (!const_cast<BallisticCalculatorSettings*>(this)->_DropSpeedFact) {
+        const_cast<BallisticCalculatorSettings*>(this)->_DropSpeedFact = const_cast<BallisticCalculatorSettings*>(this)->_createSettingsFact(DropSpeedName);
+    }
+    return const_cast<BallisticCalculatorSettings*>(this)->_DropSpeedFact;
+}
+
+Fact* BallisticCalculatorSettings::DropDirection() const
+{
+    if (!const_cast<BallisticCalculatorSettings*>(this)->_DropDirectionFact) {
+        const_cast<BallisticCalculatorSettings*>(this)->_DropDirectionFact = const_cast<BallisticCalculatorSettings*>(this)->_createSettingsFact(DropDirectionName);
+    }
+    return const_cast<BallisticCalculatorSettings*>(this)->_DropDirectionFact;
 }
 
 void BallisticCalculatorSettings::saveCurrentProfile(const QString& name)
