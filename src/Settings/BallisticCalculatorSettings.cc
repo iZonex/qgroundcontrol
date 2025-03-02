@@ -15,16 +15,10 @@
         return _ ## NAME ## Fact; \
     }
 
-// Объявление группы настроек
-const char* BallisticCalculatorSettings::name = "BallisticCalculator";
-const char* BallisticCalculatorSettings::settingsGroup = "BallisticCalculator";
-
-// Реализация конструктора
-BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
-    : SettingsGroup(name, settingsGroup, parent)
+DECLARE_SETTINGGROUP(BallisticCalculator, "BallisticCalculator")
 {
-    QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
-
+    qmlRegisterUncreatableType<BallisticCalculatorSettings>("QGroundControl.SettingsManager", 1, 0, "BallisticCalculatorSettings", "Reference only");
+    
     // Создаем факты при инициализации
     PayloadMass();
     VerticalDragCoefficient();
@@ -52,6 +46,8 @@ BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
     
     ActiveProfile();
     SavedProfiles();
+    
+    QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
 }
 
 // Реализация методов доступа к Fact
