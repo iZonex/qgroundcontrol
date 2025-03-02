@@ -19,37 +19,7 @@ const char* BallisticCalculatorSettings::settingsGroup = "BallisticCalculator";
         return _ ## NAME ## Fact; \
     }
 
-// Реализация методов доступа к Fact
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, PayloadMass)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, VerticalDragCoefficient)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, HorizontalDragCoefficient)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, VerticalCrossSection)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, HorizontalCrossSection)
-
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, WindSpeed)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, WindDirection)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterEnabled)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterPeriod)
-
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxChannel)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMinHeight)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMaxHeight)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropHeight)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, GimbalPitch)
-
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MarkerSize)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MarkerOffsetX)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MarkerOffsetY)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ShowTrajectory)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, ReadyToDropEnabled)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MaxDropWindSpeed)
-
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ActiveProfile)
-DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, SavedProfiles)
-
-// Полная реализация конструктора
-BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
-    : SettingsGroup(name, settingsGroup, parent)
+DECLARE_SETTINGGROUP(BallisticCalculator, "BallisticCalculator")
 {
     QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
 
@@ -81,6 +51,34 @@ BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
     ActiveProfile();
     SavedProfiles();
 }
+
+// Реализация методов доступа к Fact
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, PayloadMass)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, VerticalDragCoefficient)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, HorizontalDragCoefficient)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, VerticalCrossSection)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, HorizontalCrossSection)
+
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, WindSpeed)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, WindDirection)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterEnabled)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterPeriod)
+
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxChannel)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMinHeight)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMaxHeight)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropHeight)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, GimbalPitch)
+
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MarkerSize)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MarkerOffsetX)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MarkerOffsetY)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ShowTrajectory)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, ReadyToDropEnabled)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MaxDropWindSpeed)
+
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ActiveProfile)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, SavedProfiles)
 
 // Реализация деструктора
 BallisticCalculatorSettings::~BallisticCalculatorSettings()
