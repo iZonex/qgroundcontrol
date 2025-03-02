@@ -15,7 +15,13 @@
         return _ ## NAME ## Fact; \
     }
 
-DECLARE_SETTINGGROUP(BallisticCalculator, "BallisticCalculator")
+// Объявление группы настроек
+const char* BallisticCalculatorSettings::name = "BallisticCalculator";
+const char* BallisticCalculatorSettings::settingsGroup = "BallisticCalculator";
+
+// Реализация конструктора
+BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
+    : SettingsGroup(name, settingsGroup, parent)
 {
     QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
 
