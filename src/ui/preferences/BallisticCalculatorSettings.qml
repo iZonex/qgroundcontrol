@@ -58,6 +58,8 @@ Rectangle {
 
     readonly property real _internalWidthRatio:    0.8
 
+    QGCPalette { id: qgcPal; colorGroupEnabled: enabled }
+
     QGCFlickable {
         clip:               true
         anchors.fill:       parent
@@ -98,9 +100,11 @@ Rectangle {
                             font.bold:      true
                         }
 
-                        FactCheckBox {
-                            fact:           _enabled
-                            Layout.fillWidth: true
+                        QGCCheckBox {
+                            checked:        _enabled.rawValue
+                            onClicked: {
+                                _enabled.rawValue = checked
+                            }
                         }
                     }
                 }
@@ -108,13 +112,14 @@ Rectangle {
                 // Параметры ветра
                 QGCLabel {
                     text:       qsTr("Параметры ветра")
-                    visible:    _enabled.value
+                    visible:    _enabled.rawValue
+                    font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: windParamsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  windParamsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.value
+                    visible:                _enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -127,21 +132,23 @@ Rectangle {
                         columnSpacing:              _margins
 
                         QGCLabel {
-                            text:           _windSpeed.shortDescription
+                            text:           qsTr("Скорость ветра (м/с)")
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _windSpeed
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите скорость ветра")
                         }
 
                         QGCLabel {
-                            text:           _windDirection.shortDescription
+                            text:           qsTr("Направление ветра (градусы)")
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _windDirection
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите направление ветра (0-360)")
                         }
                     }
                 }
@@ -149,13 +156,14 @@ Rectangle {
                 // Параметры груза
                 QGCLabel {
                     text:       qsTr("Параметры груза")
-                    visible:    _enabled.value
+                    visible:    _enabled.rawValue
+                    font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: payloadParamsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  payloadParamsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.value
+                    visible:                _enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -168,21 +176,23 @@ Rectangle {
                         columnSpacing:              _margins
 
                         QGCLabel {
-                            text:           _payloadMass.shortDescription
+                            text:           qsTr("Масса груза (кг)")
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _payloadMass
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите массу груза")
                         }
 
                         QGCLabel {
-                            text:           _cameraOffset.shortDescription
+                            text:           qsTr("Смещение от камеры (м)")
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _cameraOffset
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите смещение от камеры")
                         }
                     }
                 }
@@ -190,13 +200,14 @@ Rectangle {
                 // Коэффициенты сопротивления
                 QGCLabel {
                     text:       qsTr("Коэффициенты сопротивления")
-                    visible:    _enabled.value
+                    visible:    _enabled.rawValue
+                    font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: dragCoefficientsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  dragCoefficientsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.value
+                    visible:                _enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -209,21 +220,23 @@ Rectangle {
                         columnSpacing:              _margins
 
                         QGCLabel {
-                            text:           _verticalDragCoefficient.shortDescription
+                            text:           qsTr("Вертикальный коэффициент сопротивления")
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _verticalDragCoefficient
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите вертикальный коэффициент")
                         }
 
                         QGCLabel {
-                            text:           _horizontalDragCoefficient.shortDescription
+                            text:           qsTr("Горизонтальный коэффициент сопротивления")
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _horizontalDragCoefficient
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите горизонтальный коэффициент")
                         }
                     }
                 }
@@ -231,13 +244,14 @@ Rectangle {
                 // Площади сечения
                 QGCLabel {
                     text:       qsTr("Площади сечения")
-                    visible:    _enabled.value
+                    visible:    _enabled.rawValue
+                    font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: crossSectionalGrid.height + (_margins * 2)
                     Layout.preferredWidth:  crossSectionalGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.value
+                    visible:                _enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -250,21 +264,23 @@ Rectangle {
                         columnSpacing:              _margins
 
                         QGCLabel {
-                            text:           _verticalCrossSection.shortDescription
+                            text:           qsTr("Вертикальная площадь сечения (м²)")
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _verticalCrossSection
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите вертикальную площадь")
                         }
 
                         QGCLabel {
-                            text:           _horizontalCrossSection.shortDescription
+                            text:           qsTr("Горизонтальная площадь сечения (м²)")
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _horizontalCrossSection
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите горизонтальную площадь")
                         }
                     }
                 }
@@ -272,13 +288,14 @@ Rectangle {
                 // Параметры высоты
                 QGCLabel {
                     text:       qsTr("Параметры высоты")
-                    visible:    _enabled.value
+                    visible:    _enabled.rawValue
+                    font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: heightParamsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  heightParamsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.value
+                    visible:                _enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -291,16 +308,21 @@ Rectangle {
                         columnSpacing:              _margins
 
                         QGCLabel {
-                            text:           _heightMode.shortDescription
+                            text:           qsTr("Режим определения высоты")
                             Layout.fillWidth: true
                         }
-                        FactComboBox {
-                            fact:           _heightMode
+                        QGCComboBox {
+                            id:             heightModeCombo
+                            model:          [qsTr("Фиксированная высота"), qsTr("Высота от барометра"), qsTr("Высота от AUX канала")]
+                            currentIndex:   _heightMode.rawValue
+                            onActivated: {
+                                _heightMode.rawValue = index
+                            }
                             width:          _valueFieldWidth
                         }
 
                         QGCLabel {
-                            text:           _fixedHeight.shortDescription
+                            text:           qsTr("Фиксированная высота (м)")
                             visible:        _heightMode.rawValue === 0
                             Layout.fillWidth: true
                         }
@@ -308,10 +330,11 @@ Rectangle {
                             fact:           _fixedHeight
                             visible:        _heightMode.rawValue === 0
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите фиксированную высоту")
                         }
 
                         QGCLabel {
-                            text:           _auxChannel.shortDescription
+                            text:           qsTr("Номер AUX канала")
                             visible:        _heightMode.rawValue === 2
                             Layout.fillWidth: true
                         }
@@ -319,10 +342,11 @@ Rectangle {
                             fact:           _auxChannel
                             visible:        _heightMode.rawValue === 2
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите номер канала")
                         }
 
                         QGCLabel {
-                            text:           _auxMinHeight.shortDescription
+                            text:           qsTr("Минимальная высота AUX (м)")
                             visible:        _heightMode.rawValue === 2
                             Layout.fillWidth: true
                         }
@@ -330,10 +354,11 @@ Rectangle {
                             fact:           _auxMinHeight
                             visible:        _heightMode.rawValue === 2
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите минимальную высоту")
                         }
 
                         QGCLabel {
-                            text:           _auxMaxHeight.shortDescription
+                            text:           qsTr("Максимальная высота AUX (м)")
                             visible:        _heightMode.rawValue === 2
                             Layout.fillWidth: true
                         }
@@ -341,6 +366,7 @@ Rectangle {
                             fact:           _auxMaxHeight
                             visible:        _heightMode.rawValue === 2
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите максимальную высоту")
                         }
                     }
                 }
@@ -348,13 +374,14 @@ Rectangle {
                 // Параметры отображения
                 QGCLabel {
                     text:       qsTr("Параметры отображения")
-                    visible:    _enabled.value
+                    visible:    _enabled.rawValue
+                    font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: displayOptionsGrid.height + (_margins * 2)
                     Layout.preferredWidth:  displayOptionsGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.value
+                    visible:                _enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -367,12 +394,14 @@ Rectangle {
                         columnSpacing:              _margins
 
                         QGCLabel {
-                            text:           _showTrajectory.shortDescription
+                            text:           qsTr("Показывать траекторию")
                             Layout.fillWidth: true
                         }
-                        FactCheckBox {
-                            fact:           _showTrajectory
-                            Layout.fillWidth: true
+                        QGCCheckBox {
+                            checked:        _showTrajectory.rawValue
+                            onClicked: {
+                                _showTrajectory.rawValue = checked
+                            }
                         }
                     }
                 }
@@ -380,13 +409,14 @@ Rectangle {
                 // Калибровка OSD
                 QGCLabel {
                     text:       qsTr("Калибровка OSD")
-                    visible:    _enabled.value
+                    visible:    _enabled.rawValue
+                    font.family: ScreenTools.demiboldFontFamily
                 }
                 Rectangle {
                     Layout.preferredHeight: calibrationGrid.height + (_margins * 2)
                     Layout.preferredWidth:  calibrationGrid.width + (_margins * 2)
                     color:                  qgcPal.windowShade
-                    visible:                _enabled.value
+                    visible:                _enabled.rawValue
                     Layout.fillWidth:       true
 
                     GridLayout {
@@ -399,59 +429,67 @@ Rectangle {
                         columnSpacing:              _margins
 
                         QGCLabel {
-                            text:           _calibrationMode.shortDescription
+                            text:           qsTr("Режим калибровки")
                             Layout.fillWidth: true
                         }
-                        FactCheckBox {
-                            fact:           _calibrationMode
-                            Layout.fillWidth: true
+                        QGCCheckBox {
+                            id:             calibrationModeCheckbox
+                            checked:        _calibrationMode.rawValue
+                            onClicked: {
+                                _calibrationMode.rawValue = checked
+                            }
                         }
 
                         QGCLabel {
-                            text:           _calibrationStep.shortDescription
-                            visible:        _calibrationMode.value
+                            text:           qsTr("Шаг калибровки (пиксели)")
+                            visible:        calibrationModeCheckbox.checked
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _calibrationStep
-                            visible:        _calibrationMode.value
+                            visible:        calibrationModeCheckbox.checked
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите шаг калибровки")
                         }
 
                         QGCLabel {
-                            text:           _markerSize.shortDescription
+                            text:           qsTr("Размер маркера (пиксели)")
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _markerSize
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите размер маркера")
                         }
 
                         QGCLabel {
-                            text:           _markerOffsetX.shortDescription
+                            text:           qsTr("Смещение маркера по X (пиксели)")
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _markerOffsetX
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите смещение по X")
                         }
 
                         QGCLabel {
-                            text:           _markerOffsetY.shortDescription
+                            text:           qsTr("Смещение маркера по Y (пиксели)")
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _markerOffsetY
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите смещение по Y")
                         }
 
                         QGCLabel {
-                            text:           _gimbalPitch.shortDescription
+                            text:           qsTr("Наклон подвеса (градусы)")
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _gimbalPitch
                             width:          _valueFieldWidth
+                            placeholderText: qsTr("Введите наклон подвеса")
                         }
 
                         QGCButton {
