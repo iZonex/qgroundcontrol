@@ -4,6 +4,12 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
+// Макрос для объявления константных методов доступа к Fact
+#define DEFINE_SETTINGFACT_CONST(NAME) \
+    static const char* NAME ## Name; \
+    Q_PROPERTY(Fact* NAME READ NAME CONSTANT) \
+    Fact* NAME() const;
+
 class BallisticCalculatorSettings : public SettingsGroup
 {
     Q_OBJECT
@@ -21,8 +27,8 @@ public:
     DEFINE_SETTINGFACT(HorizontalCrossSection)
 
     // Параметры ветра
-    DEFINE_SETTINGFACT(WindSpeed)
-    DEFINE_SETTINGFACT(WindDirection)
+    DEFINE_SETTINGFACT_CONST(WindSpeed)
+    DEFINE_SETTINGFACT_CONST(WindDirection)
     DEFINE_SETTINGFACT(WindFilterEnabled)
     DEFINE_SETTINGFACT(WindFilterPeriod)
 
@@ -34,16 +40,16 @@ public:
     DEFINE_SETTINGFACT(GimbalPitch)
 
     // Параметры OSD
-    DEFINE_SETTINGFACT(MarkerSize)
-    DEFINE_SETTINGFACT(MarkerOffsetX)
-    DEFINE_SETTINGFACT(MarkerOffsetY)
+    DEFINE_SETTINGFACT_CONST(MarkerSize)
+    DEFINE_SETTINGFACT_CONST(MarkerOffsetX)
+    DEFINE_SETTINGFACT_CONST(MarkerOffsetY)
     DEFINE_SETTINGFACT(ShowTrajectory)
-    DEFINE_SETTINGFACT(ReadyToDropEnabled)
-    DEFINE_SETTINGFACT(MaxDropWindSpeed)
+    DEFINE_SETTINGFACT_CONST(ReadyToDropEnabled)
+    DEFINE_SETTINGFACT_CONST(MaxDropWindSpeed)
 
     // Профили
     DEFINE_SETTINGFACT(ActiveProfile)
-    DEFINE_SETTINGFACT(SavedProfiles)
+    DEFINE_SETTINGFACT_CONST(SavedProfiles)
 
     // Режимы определения высоты
     static const int HeightModeFixed = 0;

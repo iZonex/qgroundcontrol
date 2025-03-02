@@ -8,6 +8,17 @@
 const char* BallisticCalculatorSettings::name = "BallisticCalculator";
 const char* BallisticCalculatorSettings::settingsGroup = "BallisticCalculator";
 
+// Макрос для объявления константных методов доступа к Fact
+#define DECLARE_SETTINGSFACT_CONST(CLASS, NAME) \
+    const char* CLASS::NAME ## Name = #NAME; \
+    Fact* CLASS::NAME() const \
+    { \
+        if (!_ ## NAME ## Fact) { \
+            const_cast<CLASS*>(this)->_ ## NAME ## Fact = const_cast<CLASS*>(this)->_createSettingsFact(NAME ## Name); \
+        } \
+        return _ ## NAME ## Fact; \
+    }
+
 // Реализация методов доступа к Fact
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, PayloadMass)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, VerticalDragCoefficient)
@@ -15,8 +26,8 @@ DECLARE_SETTINGSFACT(BallisticCalculatorSettings, HorizontalDragCoefficient)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, VerticalCrossSection)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, HorizontalCrossSection)
 
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindSpeed)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindDirection)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, WindSpeed)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, WindDirection)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterEnabled)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterPeriod)
 
@@ -26,15 +37,15 @@ DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMaxHeight)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropHeight)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, GimbalPitch)
 
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, MarkerSize)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, MarkerOffsetX)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, MarkerOffsetY)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MarkerSize)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MarkerOffsetX)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MarkerOffsetY)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ShowTrajectory)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ReadyToDropEnabled)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, MaxDropWindSpeed)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, ReadyToDropEnabled)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, MaxDropWindSpeed)
 
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ActiveProfile)
-DECLARE_SETTINGSFACT(BallisticCalculatorSettings, SavedProfiles)
+DECLARE_SETTINGSFACT_CONST(BallisticCalculatorSettings, SavedProfiles)
 
 BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
     : SettingsGroup(name, settingsGroup, parent)
