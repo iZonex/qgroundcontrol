@@ -86,9 +86,9 @@ Rectangle {
     readonly property real _internalWidthRatio:    0.8
 
     // Константы для режимов высоты (из BallisticCalculatorSettings.h)
-    readonly property int HeightModeFixed: 0
-    readonly property int HeightModeBarometric: 1
-    readonly property int HeightModeRemote: 2
+    readonly property int heightModeFixed: 0
+    readonly property int heightModeBarometric: 1
+    readonly property int heightModeRemote: 2
 
     QGCPalette { id: qgcPal; colorGroupEnabled: enabled }
 
@@ -378,48 +378,48 @@ Rectangle {
 
                         QGCLabel {
                             text:           qsTr("Фиксированная высота (м)")
-                            visible:        _heightMode === HeightModeFixed
+                            visible:        _heightMode === heightModeFixed
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _fixedHeight
-                            visible:        _heightMode === HeightModeFixed && _fixedHeight !== null
+                            visible:        _heightMode === heightModeFixed && _fixedHeight !== null
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите фиксированную высоту")
                         }
 
                         QGCLabel {
                             text:           qsTr("Номер AUX канала")
-                            visible:        _heightMode === HeightModeRemote
+                            visible:        _heightMode === heightModeRemote
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _auxChannel
-                            visible:        _heightMode === HeightModeRemote && _auxChannel !== null
+                            visible:        _heightMode === heightModeRemote && _auxChannel !== null
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите номер канала")
                         }
 
                         QGCLabel {
                             text:           qsTr("Минимальная высота AUX (м)")
-                            visible:        _heightMode === HeightModeRemote
+                            visible:        _heightMode === heightModeRemote
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _auxMinHeight
-                            visible:        _heightMode === HeightModeRemote && _auxMinHeight !== null
+                            visible:        _heightMode === heightModeRemote && _auxMinHeight !== null
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите минимальную высоту")
                         }
 
                         QGCLabel {
                             text:           qsTr("Максимальная высота AUX (м)")
-                            visible:        _heightMode === HeightModeRemote
+                            visible:        _heightMode === heightModeRemote
                             Layout.fillWidth: true
                         }
                         FactTextField {
                             fact:           _auxMaxHeight
-                            visible:        _heightMode === HeightModeRemote && _auxMaxHeight !== null
+                            visible:        _heightMode === heightModeRemote && _auxMaxHeight !== null
                             width:          _valueFieldWidth
                             placeholderText: qsTr("Введите максимальную высоту")
                         }
