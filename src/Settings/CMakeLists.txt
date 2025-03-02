@@ -1,4 +1,3 @@
-
 add_library(Settings
 	ADSBVehicleManagerSettings.cc
 	ADSBVehicleManagerSettings.h
@@ -8,6 +7,8 @@ add_library(Settings
 	AppSettings.h
 	AutoConnectSettings.cc
 	AutoConnectSettings.h
+	BallisticCalculatorSettings.cc
+	BallisticCalculatorSettings.h
 	BrandImageSettings.cc
 	BrandImageSettings.h
 	FirmwareUpgradeSettings.cc

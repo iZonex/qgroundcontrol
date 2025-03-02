@@ -944,6 +944,7 @@ SOURCES += \
     src/Settings/ADSBVehicleManagerSettings.cc \
     src/Settings/AppSettings.cc \
     src/Settings/AutoConnectSettings.cc \
+    src/Settings/BallisticCalculatorSettings.cc \
     src/Settings/BrandImageSettings.cc \
     src/Settings/RemoteIDSettings.cc \
     src/Settings/FirmwareUpgradeSettings.cc \
