@@ -4,10 +4,6 @@
 #include <QJsonArray>
 #include <QQmlEngine>
 
-// Объявление группы настроек
-const char* BallisticCalculatorSettings::name = "BallisticCalculator";
-const char* BallisticCalculatorSettings::settingsGroup = "BallisticCalculator";
-
 // Макрос для объявления константных методов доступа к Fact
 #define DECLARE_SETTINGSFACT_CONST(CLASS, NAME) \
     const char* CLASS::NAME ## Name = #NAME; \
