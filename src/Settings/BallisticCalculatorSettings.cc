@@ -6,11 +6,14 @@
 #include <QQmlEngine>
 #include <QtQml>
 
-// Определяем статические переменные класса
-const char* BallisticCalculatorSettings::name = "BallisticCalculator";
-const char* BallisticCalculatorSettings::settingsGroup = "BallisticCalculator";
+// Правильное использование макроса DECLARE_SETTINGGROUP
+// Первый параметр должен быть "BallisticCalculator", чтобы получилось "BallisticCalculatorSettings"
+DECLARE_SETTINGGROUP(BallisticCalculator, "BallisticCalculator")
+{
+    qmlRegisterUncreatableType<BallisticCalculatorSettings>("QGroundControl.SettingsManager", 1, 0, "BallisticCalculatorSettings", "Reference only");
+}
 
-// Определяем имена для всех Fact
+// Объявление констант для имен настроек
 const char* BallisticCalculatorSettings::PayloadMassName = "PayloadMass";
 const char* BallisticCalculatorSettings::VerticalDragCoefficientName = "VerticalDragCoefficient";
 const char* BallisticCalculatorSettings::HorizontalDragCoefficientName = "HorizontalDragCoefficient";
@@ -42,7 +45,6 @@ BallisticCalculatorSettings::BallisticCalculatorSettings(QObject* parent)
     : SettingsGroup(name, settingsGroup, parent)
 {
     QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
-    qmlRegisterUncreatableType<BallisticCalculatorSettings>("QGroundControl.SettingsManager", 1, 0, "BallisticCalculatorSettings", "Reference only");
 }
 
 BallisticCalculatorSettings::~BallisticCalculatorSettings()
@@ -50,7 +52,21 @@ BallisticCalculatorSettings::~BallisticCalculatorSettings()
     // Пустой деструктор, все очистится автоматически
 }
 
-// Определяем методы доступа к Fact
+// Используем макрос DECLARE_SETTINGSFACT для всех настроек
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterEnabled)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindFilterPeriod)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxChannel)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMinHeight)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, AuxMaxHeight)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropHeight)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, GimbalPitch)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, ShowTrajectory)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindAltitude)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropAltitude)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropSpeed)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropDirection)
+
+// Константные методы доступа к фактам
 Fact* BallisticCalculatorSettings::PayloadMass() const
 {
     if (!const_cast<BallisticCalculatorSettings*>(this)->_PayloadMassFact) {
@@ -107,62 +123,6 @@ Fact* BallisticCalculatorSettings::WindDirection() const
     return const_cast<BallisticCalculatorSettings*>(this)->_WindDirectionFact;
 }
 
-Fact* BallisticCalculatorSettings::WindFilterEnabled()
-{
-    if (!_WindFilterEnabledFact) {
-        _WindFilterEnabledFact = _createSettingsFact(WindFilterEnabledName);
-    }
-    return _WindFilterEnabledFact;
-}
-
-Fact* BallisticCalculatorSettings::WindFilterPeriod()
-{
-    if (!_WindFilterPeriodFact) {
-        _WindFilterPeriodFact = _createSettingsFact(WindFilterPeriodName);
-    }
-    return _WindFilterPeriodFact;
-}
-
-Fact* BallisticCalculatorSettings::AuxChannel()
-{
-    if (!_AuxChannelFact) {
-        _AuxChannelFact = _createSettingsFact(AuxChannelName);
-    }
-    return _AuxChannelFact;
-}
-
-Fact* BallisticCalculatorSettings::AuxMinHeight()
-{
-    if (!_AuxMinHeightFact) {
-        _AuxMinHeightFact = _createSettingsFact(AuxMinHeightName);
-    }
-    return _AuxMinHeightFact;
-}
-
-Fact* BallisticCalculatorSettings::AuxMaxHeight()
-{
-    if (!_AuxMaxHeightFact) {
-        _AuxMaxHeightFact = _createSettingsFact(AuxMaxHeightName);
-    }
-    return _AuxMaxHeightFact;
-}
-
-Fact* BallisticCalculatorSettings::DropHeight()
-{
-    if (!_DropHeightFact) {
-        _DropHeightFact = _createSettingsFact(DropHeightName);
-    }
-    return _DropHeightFact;
-}
-
-Fact* BallisticCalculatorSettings::GimbalPitch()
-{
-    if (!_GimbalPitchFact) {
-        _GimbalPitchFact = _createSettingsFact(GimbalPitchName);
-    }
-    return _GimbalPitchFact;
-}
-
 Fact* BallisticCalculatorSettings::MarkerSize() const
 {
     if (!const_cast<BallisticCalculatorSettings*>(this)->_MarkerSizeFact) {
@@ -187,14 +147,6 @@ Fact* BallisticCalculatorSettings::MarkerOffsetY() const
     return const_cast<BallisticCalculatorSettings*>(this)->_MarkerOffsetYFact;
 }
 
-Fact* BallisticCalculatorSettings::ShowTrajectory()
-{
-    if (!_ShowTrajectoryFact) {
-        _ShowTrajectoryFact = _createSettingsFact(ShowTrajectoryName);
-    }
-    return _ShowTrajectoryFact;
-}
-
 Fact* BallisticCalculatorSettings::ReadyToDropEnabled() const
 {
     if (!const_cast<BallisticCalculatorSettings*>(this)->_ReadyToDropEnabledFact) {
@@ -211,12 +163,12 @@ Fact* BallisticCalculatorSettings::MaxDropWindSpeed() const
     return const_cast<BallisticCalculatorSettings*>(this)->_MaxDropWindSpeedFact;
 }
 
-Fact* BallisticCalculatorSettings::ActiveProfile()
+Fact* BallisticCalculatorSettings::ActiveProfile() const
 {
-    if (!_ActiveProfileFact) {
-        _ActiveProfileFact = _createSettingsFact(ActiveProfileName);
+    if (!const_cast<BallisticCalculatorSettings*>(this)->_ActiveProfileFact) {
+        const_cast<BallisticCalculatorSettings*>(this)->_ActiveProfileFact = const_cast<BallisticCalculatorSettings*>(this)->_createSettingsFact(ActiveProfileName);
     }
-    return _ActiveProfileFact;
+    return const_cast<BallisticCalculatorSettings*>(this)->_ActiveProfileFact;
 }
 
 Fact* BallisticCalculatorSettings::SavedProfiles() const
@@ -225,38 +177,6 @@ Fact* BallisticCalculatorSettings::SavedProfiles() const
         const_cast<BallisticCalculatorSettings*>(this)->_SavedProfilesFact = const_cast<BallisticCalculatorSettings*>(this)->_createSettingsFact(SavedProfilesName);
     }
     return const_cast<BallisticCalculatorSettings*>(this)->_SavedProfilesFact;
-}
-
-Fact* BallisticCalculatorSettings::WindAltitude() const
-{
-    if (!const_cast<BallisticCalculatorSettings*>(this)->_WindAltitudeFact) {
-        const_cast<BallisticCalculatorSettings*>(this)->_WindAltitudeFact = const_cast<BallisticCalculatorSettings*>(this)->_createSettingsFact(WindAltitudeName);
-    }
-    return const_cast<BallisticCalculatorSettings*>(this)->_WindAltitudeFact;
-}
-
-Fact* BallisticCalculatorSettings::DropAltitude() const
-{
-    if (!const_cast<BallisticCalculatorSettings*>(this)->_DropAltitudeFact) {
-        const_cast<BallisticCalculatorSettings*>(this)->_DropAltitudeFact = const_cast<BallisticCalculatorSettings*>(this)->_createSettingsFact(DropAltitudeName);
-    }
-    return const_cast<BallisticCalculatorSettings*>(this)->_DropAltitudeFact;
-}
-
-Fact* BallisticCalculatorSettings::DropSpeed() const
-{
-    if (!const_cast<BallisticCalculatorSettings*>(this)->_DropSpeedFact) {
-        const_cast<BallisticCalculatorSettings*>(this)->_DropSpeedFact = const_cast<BallisticCalculatorSettings*>(this)->_createSettingsFact(DropSpeedName);
-    }
-    return const_cast<BallisticCalculatorSettings*>(this)->_DropSpeedFact;
-}
-
-Fact* BallisticCalculatorSettings::DropDirection() const
-{
-    if (!const_cast<BallisticCalculatorSettings*>(this)->_DropDirectionFact) {
-        const_cast<BallisticCalculatorSettings*>(this)->_DropDirectionFact = const_cast<BallisticCalculatorSettings*>(this)->_createSettingsFact(DropDirectionName);
-    }
-    return const_cast<BallisticCalculatorSettings*>(this)->_DropDirectionFact;
 }
 
 void BallisticCalculatorSettings::saveCurrentProfile(const QString& name)
@@ -360,6 +280,4 @@ void BallisticCalculatorSettings::applyProfileData(const QJsonObject& profile)
         MarkerOffsetX()->setRawValue(profile["markerOffsetX"].toInt());
     if (profile.contains("markerOffsetY"))
         MarkerOffsetY()->setRawValue(profile["markerOffsetY"].toInt());
-}
-
-#include "moc_BallisticCalculatorSettings.cpp" 
+} 
