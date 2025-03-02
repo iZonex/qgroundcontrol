@@ -255,6 +255,46 @@
             "min":             0.1,
             "max":             10,
             "decimalPlaces":   1
+        },
+        {
+            "name":             "WindAltitude",
+            "shortDescription": "Высота измерения ветра",
+            "longDescription":  "Высота, на которой измеряется ветер",
+            "type":            "double",
+            "defaultValue":     10,
+            "min":             0,
+            "max":             500,
+            "units":           "m"
+        },
+        {
+            "name":             "DropAltitude",
+            "shortDescription": "Высота сброса",
+            "longDescription":  "Текущая высота сброса груза",
+            "type":            "double",
+            "defaultValue":     10,
+            "min":             0,
+            "max":             500,
+            "units":           "m"
+        },
+        {
+            "name":             "DropSpeed",
+            "shortDescription": "Скорость сброса",
+            "longDescription":  "Начальная скорость груза при сбросе",
+            "type":            "double",
+            "defaultValue":     0,
+            "min":             0,
+            "max":             10,
+            "units":           "m/s"
+        },
+        {
+            "name":             "DropDirection",
+            "shortDescription": "Направление сброса",
+            "longDescription":  "Направление сброса груза в градусах",
+            "type":            "double",
+            "defaultValue":     0,
+            "min":             0,
+            "max":             360,
+            "units":           "°"
         }
     ]
 } 

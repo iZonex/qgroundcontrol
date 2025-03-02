@@ -41,6 +41,7 @@ DECLARE_SETTINGSFACT(BallisticCalculatorSettings, WindAltitude)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropAltitude)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropSpeed)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, DropDirection)
+DECLARE_SETTINGSFACT(BallisticCalculatorSettings, CameraOffset)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, CalibrationMode)
 DECLARE_SETTINGSFACT(BallisticCalculatorSettings, CalibrationStep)
 

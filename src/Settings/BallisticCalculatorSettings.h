@@ -39,6 +39,7 @@ public:
     DEFINE_SETTINGFACT(DropAltitude)
     DEFINE_SETTINGFACT(DropSpeed)
     DEFINE_SETTINGFACT(DropDirection)
+    DEFINE_SETTINGFACT(CameraOffset)
 
     // Параметры OSD
     DEFINE_SETTINGFACT(MarkerSize)
